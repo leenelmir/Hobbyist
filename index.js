@@ -7,8 +7,12 @@ const bodyparse = require('body-parser');
 const config = require("config");
 const app = express();
 
+app.set('view engine', 'ejs');
+app.use(bodyparse.json());
+app.use(bodyparse.urlencoded( { extended: true }));
+app.use(express.static("public"));
 
-if(!config.get("jwtPrivateKey")){
+if(!config.has("jwtPrivateKey")){
     console.error("FATAL ERROR: jwtPrivateKey is not defined.");
     process.exit(1);
 }
@@ -17,19 +21,17 @@ mongoose.connect("mongodb://localhost:27017/HobbyWebsite")
         .catch(err => console.error("Could not connect to MongoDB", err));
 
 
+app.get('/signup', (req, res) => {
+    res.render('signup');
+})
 
-app.use(bodyparse.json());
-app.use(bodyparse.urlencoded( { extended: true }));
+
 app.use("/api/users", users);
 app.use("/api/auth", auth);
 
-
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.render('index.ejs');
 });
-
-
-
 
 app.listen(3000, () => {
     console.log("Listening to port 3000...");
