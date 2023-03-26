@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const Joi = require("Joi");
 const { User } = require("../models/user");
 const _ = require("lodash");
@@ -5,6 +6,7 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
+const config = require("config");
 
 function validate(req) {
     const schema = Joi.object({
@@ -16,21 +18,24 @@ function validate(req) {
 };
 
 router.post("/", async (req, res) => {
+    
     const { error } = validate(req.body);
-    if(error)
-        return res.status(400).send(error.details[0].message);
+
+    if(error){
+        return res.json({status: 'Invalid email or password 1'})
+    }
 
     let user = await User.findOne({ email: req.body.username });
     if(!user)
-        return res.status(400).send("Invalid email or password.");
+        return res.json({status: "Invalid email or password"})
     
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if(!validPassword)
-        return res.status(400).send("Invalid email or password.");
+        return res.json({status: "Invalid email or password"})
+
+    const token = jwt.sign({ _id: user._id}, config.get('jwtPrivateKey'));
     
-    const token = user.generateAuthToken();
-    res.send(token);
-    console.log('complete');
+    res.status(200).header("x-auth-token", token).send({status: "ok", data: token});
 });
 
 module.exports = router;

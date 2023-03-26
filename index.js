@@ -6,9 +6,12 @@ const auth = require("./routes/auth");
 const bodyparse = require('body-parser');
 const config = require("config");
 const app = express();
+const cors = require('cors');
 
+app.use(cors({ exposedHeaders: 'x-auth-token' }))
 app.set('view engine', 'ejs');
 app.use(bodyparse.json());
+app.use(express.json());
 app.use(bodyparse.urlencoded( { extended: true }));
 app.use(express.static("public"));
 
@@ -25,12 +28,12 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 })
 
-
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+app.get('/welcome', (req,res)=> res.render('welcome'));
 
 app.get("/", (req, res) => {
-    res.render('index.ejs');
+    res.render('index');
 });
 
 app.listen(3000, () => {

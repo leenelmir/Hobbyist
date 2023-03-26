@@ -31,8 +31,8 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true
-       // match: /^\+\d{3}\d{8}$/
+        required: true,
+        match: /^\+\d{3}\d{8}$/
     }
 });
 userSchema.methods.generateAuthToken = function() {
@@ -42,6 +42,7 @@ const User = mongoose.model("Users", userSchema);
 
 
 function validateUser(user) {
+    
     const schema = Joi.object({
         firstName: Joi.string().min(1).max(50).required(),
         lastName: Joi.string().min(1).max(50).required(),
@@ -49,10 +50,9 @@ function validateUser(user) {
         password: Joi.string().min(8).max(1024).required(),
         phone:Joi.string().required()
     });
-
+   
     return schema.validate(user);
 };
-
 
 exports.User = User;
 exports.validate = validateUser;

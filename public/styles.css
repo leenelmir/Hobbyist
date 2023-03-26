@@ -69,3 +69,6 @@
     font-size: 12px;
   }
   
+  .message .invalid {
+    display: none
+  }
