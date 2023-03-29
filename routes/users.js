@@ -9,24 +9,32 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
    
-    const { error } = validate(req.body);
-    if(error){
-        return res.status(400).json({status: "invalid"})
+    const reply = validate(req.body);
+    if (reply != 'all good'){
+        return res.status(400).json({status: reply});
     }
 
+    /*check email availability*/
     let user = await User.findOne({ email: req.body.email });
     if(user){
-        return res.status(400).json({status: "Email already registered. Please try another email!"});
+        return res.status(400).json({status: "An account already exists with this email. Please login or try another email!"});
     }
 
-    user = new User(_.pick(req.body, ['firstName', 'lastName', 'email', 'password','phone']));
+    /*check username availability*/
+    user = await User.findOne({ username: req.body.username });
+    if(user){
+        return res.status(400).json({status: "Username already exists. Please try another username!"});
+    }
+
+    user = new User(_.pick(req.body, ['firstName', 'lastName', 'email', 'password','phone', 'username']));
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(req.body.password, salt);
     await user.save();
     
     const token = jwt.sign({ _id: user._id}, config.get('jwtPrivateKey'));
-    res.header("x-auth-token", token).status(200).send({"user": _.pick(user, ['_id', 'firstName', 'lastName', 'email', 'phone']),
+    res.header("x-auth-token", token).status(200).send({"user": _.pick(user, ['_id', 'firstName', 'lastName', 'email', 'phone', 'username']),
     "status": "ok"});
+    
 });
 
 module.exports = router;

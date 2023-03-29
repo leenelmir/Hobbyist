@@ -33,14 +33,14 @@
         </div>
         <div class="form-group">
           <label for="Username">Username:</label>
-          <input type="text" id="Username" name="Username" placeholder="Enter your username" required>
+          <input type="text" id="username" name="Username" placeholder="Enter your username" required>
         </div>
         <div class="form-group">
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" placeholder="Enter a password" required>
         </div>
         <div class="message">
-          <div class="invalid" id="invalid">Error: email already taken or </div>
+          <div class="invalid" id="invalid"> Error </div>
         </div>
         <div class="button-container">
           <button type="submit" class="btn">Submit</button>
@@ -62,6 +62,7 @@
         const phone = document.getElementById('phone').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
+        const username = document.getElementById('username').value;
         
             fetch('/api/users', {
               method: 'POST',
@@ -71,21 +72,20 @@
                 phone : phone,
                 email : email,
                 password : password,
+                username : username
               }),
               headers: {"Content-Type":"application/json; charset=UTF-8"}
             })
             .then((res) => res.json())
             .then((data) => {
-              if (data.status == 'Email already registered. Please try another email!')  {
-                invalid.textContent = 'Email already registered. Please try another email!'
-                invalid.style.display = 'block';
-              }
-              else if (data.status == 'invalid'){
-                invalid.textContent = 'Invalid entry!'
-                invalid.style.display = 'block';
+              if (data.status != 'ok'){
+                invalid.textContent = data.status;
+                invalid.style.display = 'block'
               }
               else {
-                window.location.href = '/welcome';
+                invalid.textContent = 'Account successfully created. Redirecting to login page...';
+                invalid.style.display = 'block';
+                setTimeout(function() { window.location.href = '/';}, 2000);
               }
 
           })
