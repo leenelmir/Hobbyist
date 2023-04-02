@@ -30,6 +30,14 @@ router.post("/", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(req.body.password, salt);
     await user.save();
+
+    const profile = new Profile({
+        user: user._id,
+        description: null,
+        profilePicture: null,
+        hobbies: []
+    });
+    await profile.save();
     
     const token = jwt.sign({ _id: user._id}, config.get('jwtPrivateKey'));
     res.header("x-auth-token", token).status(200).send({"user": _.pick(user, ['_id', 'firstName', 'lastName', 'email', 'phone', 'username']),
