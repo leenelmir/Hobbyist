@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const {User, validate} = require("../models/user");
+const { Profile } = require("../models/profile");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
