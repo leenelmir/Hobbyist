@@ -30,6 +30,10 @@ app.get('/signup', (req, res) => {
 
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+app.get('/welcome', (req, res) => {
+    const token = req.headers['x-auth-token'];
+    res.render('welcome');
+})
 
 app.get("/", (req, res) => {
     res.render('index');
