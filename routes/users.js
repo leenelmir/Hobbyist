@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
     await profile.save();
     
     const token = jwt.sign({ _id: user._id}, config.get('jwtPrivateKey'));
-    res.header("x-auth-token", token).status(200).send({"user": _.pick(user, ['_id', 'firstName', 'lastName', 'email', 'phone', 'username']),
+    res.cookie("token", token, {httpOnly:true}).status(200).send({"user": _.pick(user, ['_id', 'firstName', 'lastName', 'email', 'phone', 'username']),
     "status": "ok"});
     
 });

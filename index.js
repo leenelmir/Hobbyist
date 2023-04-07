@@ -33,7 +33,6 @@ app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/profile", profile);
 
-
 app.get("/", (req, res) => {
     res.render('index');
 });

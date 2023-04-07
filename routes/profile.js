@@ -1,18 +1,23 @@
 const { Profile } = require("../models/profile");
 const express = require("express");
 const router = express.Router();
+const cookieParser = require('cookie-parser');
+router.use(cookieParser());
 const authenticateUser = require("../middleware/auth");
 const { User } = require("../models/user");
-
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 router.get("/", authenticateUser, async (req, res) => {
+ 
     try {
-        const userId = req.body.userID;
+        const userId = req.user._id;
         const profile = await Profile.findOne({ _id: userId }).populate('user');
         if(!profile)
         {
-            return res.status(404).send("Profile was not found!");
+            return res.status(404).send("Profile was not found!" + userId);
         }
+
         res.render('profile', { profile });
     }
     catch(err)
@@ -25,7 +30,7 @@ router.get("/", authenticateUser, async (req, res) => {
 router.get("/:username", authenticateUser, async (req, res) => {
   try
   {
-      const user = User.findOne( { username: req.params.username });
+      const user = await User.findOne( { username: req.params.username });
       const profile = await Profile.findOne( { user:  user._id } ).populate('user');
       if(!profile)
       {
