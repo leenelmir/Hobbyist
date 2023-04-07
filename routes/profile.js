@@ -2,6 +2,7 @@ const { Profile } = require("../models/profile");
 const express = require("express");
 const router = express.Router();
 const authenticateUser = require("../middleware/auth");
+const { User } = require("../models/user");
 
 
 router.get("/", authenticateUser, async (req, res) => {
@@ -49,5 +50,23 @@ router.post("/", authenticateUser, async (req, res) => {
       res.status(500).send("Server error");
     }
   });
+
+router.get("/:username", authenticateUser, async (req, res) => {
+    try
+    {
+        const user = User.findOne( { username: req.params.username });
+        const profile = await Profile.findOne( { user:  user._id } ).populate('user');
+        if(!profile)
+        {
+            return res.status(404).send("Profile was not found!");
+        }
+        res.render('profile', { profile });
+    }
+    catch (err)
+    {
+        console.error(err);
+        res.status(500).send("Server error");
+    }
+})
 
 module.exports = router;
