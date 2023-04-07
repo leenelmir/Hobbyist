@@ -12,7 +12,7 @@ router.get("/", authenticateUser, async (req, res) => {
  
     try {
         const userId = req.user._id;
-        const profile = await Profile.findOne({ _id: userId }).populate('user');
+        const profile = await Profile.findOne({ user: userId }).populate('user');
         if(!profile)
         {
             return res.status(404).send("Profile was not found!" + userId);
