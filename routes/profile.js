@@ -22,6 +22,24 @@ router.get("/", authenticateUser, async (req, res) => {
     }
 });
 
+router.get("/:username", authenticateUser, async (req, res) => {
+  try
+  {
+      const user = User.findOne( { username: req.params.username });
+      const profile = await Profile.findOne( { user:  user._id } ).populate('user');
+      if(!profile)
+      {
+          return res.status(404).send("Profile was not found!");
+      }
+      res.render('profile', { profile });
+  }
+  catch (err)
+  {
+      console.error(err);
+      res.status(500).send("Server error");
+  }
+});
+
 router.post("/", authenticateUser, async (req, res) => {
     try {
       const userId = req.body.id;
@@ -51,22 +69,6 @@ router.post("/", authenticateUser, async (req, res) => {
     }
   });
 
-router.get("/:username", authenticateUser, async (req, res) => {
-    try
-    {
-        const user = User.findOne( { username: req.params.username });
-        const profile = await Profile.findOne( { user:  user._id } ).populate('user');
-        if(!profile)
-        {
-            return res.status(404).send("Profile was not found!");
-        }
-        res.render('profile', { profile });
-    }
-    catch (err)
-    {
-        console.error(err);
-        res.status(500).send("Server error");
-    }
-})
+
 
 module.exports = router;
