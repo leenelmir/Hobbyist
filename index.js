@@ -1,8 +1,9 @@
-const Joi = require("joi");
+const Joi = require("Joi");
 const express = require("express");
 const mongoose = require("mongoose");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
+const profile = require("./routes/profile");
 const bodyparse = require('body-parser');
 const config = require("config");
 const app = express();
@@ -30,10 +31,8 @@ app.get('/signup', (req, res) => {
 
 app.use("/api/users", users);
 app.use("/api/auth", auth);
-app.get('/welcome', (req, res) => {
-    const token = req.headers['x-auth-token'];
-    res.render('welcome');
-})
+app.use("/profile", profile);
+
 
 app.get("/", (req, res) => {
     res.render('index');
