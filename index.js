@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
 const profile = require("./routes/profile");
+const friendship = require("./routes/friendships");
 const bodyparse = require('body-parser');
 const config = require("config");
 const app = express();
@@ -31,6 +32,7 @@ app.get('/signup', (req, res) => {
 
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+app.use("/api/friendships", friendship);
 app.use("/profile", profile);
 
 app.get("/", (req, res) => {
