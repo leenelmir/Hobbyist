@@ -1,0 +1,154 @@
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  /* background-image: url("https://cdn.discordapp.com/attachments/976997370132848640/1086629319465500782/Axdwq_different_hobbies_f65b5086-797c-4e08-9662-30b6fcc13eb1.png");
+  background-size: cover; */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 8px;
+  width: 100%;
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  box-shadow: 0px 0px 5px #FFA500;
+}
+
+.form-group input:required,
+.form-group select:required,
+.form-group textarea:required {
+  border-color: #FFA500;
+}
+
+body {
+  /* background-color: cyan; */
+  background-image: url("https://www.chanty.com/blog/wp-content/uploads/2021/11/hobby-quotes-1024x524.png");
+  background-size: cover;
+  font-family: Georgia, serif;
+}
+
+h2 {
+  font-family: "Times New Roman", serif;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+#username {
+  color: gray;
+}
+
+.form-group {
+  /* border: 1px solid black;
+  background-color: white;
+  padding: 10px; */
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  /* font-size: 18px; */
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-left: 5px;    
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #FF7F00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #FFA500;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #FFA500;
+  transition: border-color 0.3s ease;
+}
+
+.btn-secondary {
+  background-color: #ccc;
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+.button-container a {
+  margin-right: 10px;
+}
+
+.message .invalid {
+  display: none;
+}
+
+#profilePicture {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.checkboxes label {
+  display: flex;
+  align-items: center;
+  margin: 0 10px 10px 0;
+}
+
+.checkboxes input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+input[type="checkbox"] + label:before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+input[type="checkbox"]:checked + label:before {
+  background-color: orange;
+}
