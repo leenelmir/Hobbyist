@@ -49,7 +49,7 @@
         invalid.style.display = 'none';
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        
+
             fetch('/api/auth', {
               method: 'POST',
               body: JSON.stringify({
@@ -67,6 +67,8 @@
               else {
                 invalid.textContent = "Login successful. Logging in...";
                 invalid.style.display = 'block';
+            //    setTimeout(function() { window.location.href = '/welcome';}, 10000);
+              
               }
           })
             

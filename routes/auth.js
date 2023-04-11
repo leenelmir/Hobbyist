@@ -53,9 +53,10 @@ router.post("/", async (req, res) => {
         console.log("pass")
         return res.json({status: "Password is incorrect"})
     }
+    console.log("id: " + user._id);
     const token = jwt.sign({ _id: user._id}, config.get('jwtPrivateKey'));
     
-    res.status(200).header("x-auth-token", token).send({status: "ok", data: token});
+    res.cookie("token", token, {httpOnly:true}).status(200).send({status: "ok", data: token});
 });
 
 module.exports = router;
