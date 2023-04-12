@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const { Friendship } = require("../models/friendship");
 const { User } = require("../models/user");
 const authenticateUser = require("../middleware/auth");
@@ -15,7 +14,7 @@ router.post("/request", async (req, res) => {       //NOTE: ADD BACK THE MIDDLEW
         });
 
         if(!receiverUser)
-            res.status(400).send("User requesting friendship with does not exist!");
+            return res.status(400).send("User requesting friendship with does not exist!");
         
         const receiverID = receiverUser._id;
         const existingFriendship = await Friendship.findOne({
@@ -52,7 +51,7 @@ router.post("/request", async (req, res) => {       //NOTE: ADD BACK THE MIDDLEW
         });
 
         await newFriendship.save();
-        res.status(200).send("Request successfully sent!");
+        return res.status(200).send("Request successfully sent!");
     }
     catch(err)
     {
