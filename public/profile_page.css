@@ -11,7 +11,7 @@
   max-width: 600px; /* Set the maximum width of the container */
   margin: 0 auto; /* Center the container horizontally */
   padding: 20px; /* Add some padding around the container */
-  border: 1px solid #000; /* Add a border around the container */
+  /* border: 1px solid #000; Add a border around the container */
   background-color: #f8f8f8; /* Set the background color of the container */
 }
 
@@ -22,7 +22,8 @@
   background-color: #f0f0f0;
   border: 1px solid #ddd;
   border-radius: 3px;
-  padding: 0px;
+  padding: 10px; 
+  margin-bottom: 15px; /* Increased margin bottom to increase spacing between the input boxes */
   width: 100%;
 }
 
@@ -40,8 +41,7 @@
 
 body {
   /* background-color: cyan; */
-  background-image: url("https://i.fbcd.co/products/original/994775aec3b983714b0ace91da956bec23c0afe3ad2c162465f8c823655c536d.jpg");
-  background-size: cover;
+  
   font-family: Georgia, serif;
 }
 

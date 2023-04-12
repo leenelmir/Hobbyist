@@ -6,25 +6,45 @@
     <script src="hobby_dictionary.js"></script>
     <script src="city_dictionary.js"></script>
     <style>
+
+        body {
+          background-image: url('https://img.freepik.com/free-photo/flay-lay-workspace-with-copy-space_23-2148219328.jpg?size=626&ext=jpg&ga=GA1.1.522147423.1681298055&semt=robertav1_2_sidr');
+          background-size: cover;
+          background-attachment: fixed;
+        }
+
+        #form-container {
+          border: 1px solid black;
+          max-width: 500px;
+          margin: 0 auto;
+          height: 400px;
+          overflow-y: scroll;
+        }
+
         img {
           border-radius: 50%;
+          aspect-ratio: 1/1;
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+          cursor: pointer; /* added this to show the image is clickable */
+          margin-left: auto;
+          margin-right: auto;
         }
-        #profilePicture {
-          display: none;
+
+        #imageInput {
+          display: none; /* added this to hide the file input */
         }
-        .profile-image {
+
+        .container {
           display: flex;
-          align-items: center;
           justify-content: center;
+          align-items: center;
+          height: 30vh;
         }
-        .profile-image img {
-          max-width: 200px;
-          max-height: 200px;
-        }
-        .profile-image label {
-          display: block;
-          margin-top: 10px;
-          text-align: center;
+
+        #avatar:hover {
+          filter: brightness(75%);
         }
         </style>
   </head>
@@ -32,26 +52,52 @@
     <div class="form-container" style="max-width: 600px; margin: 0 auto;">
       <h2 style="text-align: center; font-family: 'Lucida Handwriting', cursive; font-size: 40px; color: #FFA500;">My Profile</h2>
       <form id="profileForm" enctype="multipart/form-data">
-        <div class="form-group profile-image">
-          <label for="profilePicture">
-            <img id="avatar" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1680858378~exp=1680858978~hmac=1fa0a78ae7a6f2dc8818abc47418718f5fff5a3526e687369d7d0d9a12b3c774" alt="Avatar">
-          </label>
-          <input type="file" id="profilePicture" name="profilePicture">
+        <input type="file" id="imageInput">
+        <div class="container">
+          <img id="avatar" src="https://365webresources.com/wp-content/uploads/2016/09/FREE-PROFILE-AVATARS.png" alt="Avatar" style="width:200px">
         </div>
+          <script>
+          const imageInput = document.getElementById('imageInput');
+          const avatarImg = document.getElementById('avatar');
+          const logoImg = document.getElementById('logo');
+
+          avatarImg.addEventListener('mouseover', () => {
+            avatarImg.style.cursor = 'pointer';
+            logoImg.style.display = 'block';
+          });
+          
+          avatarImg.addEventListener('mouseout', () => {
+            logoImg.style.display = 'none';
+          });
+    
+
+          avatarImg.addEventListener('click', () => {
+            imageInput.click();
+          });
+          imageInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+              const imageDataUrl = event.target.result;
+              avatarImg.src = imageDataUrl;
+            };
+          });
+          </script>
         <div class="form-group">
-            <label for="firstName">Username:</label>
+            <label for="firstName">Username</label>
             <input type="text" id="username" name="username" value="Karim123" readonly>
         </div>
         <div class="form-group">
-          <label for="firstName">First Name:</label>
+          <label for="firstName">First Name</label>
           <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
         </div>
         <div class="form-group">
-          <label for="lastName">Last Name:</label>
+          <label for="lastName">Last Name</label>
           <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
         </div>
         <div class="form-group">
-            <label>Hobbies:</label>
+            <label>Hobbies</label>
             <div class="checkboxes">
               <label><input type="checkbox" name="hobby" value="coding">Coding</label>
               <label><input type="checkbox" name="hobby" value="reading">Reading</label>
@@ -70,11 +116,11 @@
           
           
         <div class="form-group">
-          <label for="description">Description:</label>
+          <label for="description">Description</label>
           <textarea id="description" name="description" rows="4" cols="50" placeholder="Tell us about yourself" style="min-width: 600px; max-width:600px"></textarea>
         </div>
         <div class="form-group">
-          <label for="location">Location:</label>
+          <label for="location">Location</label>
           <select id="location" name="location" required>
             <option value="" disabled selected>Select a location</option>
             <script>
@@ -88,7 +134,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="gender">Gender:</label>
+          <label for="gender">Gender</label>
           <select id="gender" name="gender">
             <option value="male">Male</option>
             <option value="female">Female</option>
