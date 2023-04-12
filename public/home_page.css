@@ -1,0 +1,299 @@
+main {
+    height: 10000px; /* set a fixed height for the content */
+    overflow-y: scroll; /* add a scrollbar when the content overflows */
+  }
+ 
+ 
+  body {
+  /* background-color: black; */
+  background-color: white;
+ }
+ 
+ 
+ .get-started-section {
+    position: relative;
+    /* background-color: black; */
+    background-color: white;
+    padding: 100px 0;
+    text-align: center;
+  }
+   .get-started-button {
+    position: relative;
+    display: inline-block;
+    padding: 20px 40px;
+    background-color: transparent;
+    /* border: 2px solid white; */
+    border: 2px solid orange;
+    border-radius: 50px;
+    /* color: white; */
+    color: orange;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    overflow: hidden;
+  }
+   .get-started-section {
+    position: relative;
+    background-color: white;
+    padding: 100px 0;
+    text-align: center;
+  }
+   .get-started-button {
+    position: relative;
+    display: inline-block;
+    padding: 20px 40px;
+    background-color: transparent;
+    border: 2px solid orange;
+    border-radius: 50px;
+    color: orange;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    overflow: hidden;
+    cursor: pointer; /* added cursor property */
+  }
+   .get-started-button:hover {
+    color: white;
+    background-color: orange;
+    transition: all 0.3s ease-in-out;
+  }
+   .get-started-button span {
+    position: relative;
+    z-index: 2;
+  }
+   .get-started-button .neon-lights {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: linear-gradient(90deg, #ff00d4, #00c3ff, #00ff3b, #ffcd00, #ff00d4, #00c3ff, #00ff3b, #ffcd00);
+    background-size: 200%;
+    z-index: 1;
+    filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+   .get-started-button:hover .neon-lights {
+    opacity: 1;
+    animation: shine 2s linear infinite;
+  }
+   @keyframes shine {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+   .arrows-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+   .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: orange;
+    /* background-color: white; */
+    border-radius: 50%;
+    cursor: pointer; /* added cursor property */
+    z-index: 1;
+    opacity: 0.6;
+    transition: opacity 0.3s ease-in-out;
+  }
+   .arrow:hover {
+    opacity: 1;
+  }
+   .left-arrow {
+    left: -80px;
+  }
+   .right-arrow {
+    right: -80px;
+  }
+   .arrow::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    transform: rotate(45deg);
+  }
+   .arrow::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    transform: rotate(-45deg);
+  }
+  
+ 
+ 
+ 
+ 
+  .welcome {
+    position: relative;
+    text-align: center;
+    color: black;
+    /* color : white; */
+  }
+   .welcome h1 {
+    font-size: 48px;
+    margin: 0;
+    padding: 0;
+  }
+   .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    /* background-color: black; */
+    background-color: white;
+    padding: 50px;
+  }
+   .block {
+    width: 100%;
+    /* background-color: black; */
+    background-color: white;
+    /* border-bottom: 1px solid white; */
+    border-bottom: 1px solid lightcoral;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+  }
+   .block img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 20px;
+  }
+   .block-text {
+    color: black;
+    text-align: left;
+    margin-right: 20px;
+    flex-grow: 1;
+  }
+   .block-text h3 {
+    margin-top: 0;
+  }
+   .block-text p {
+    margin-bottom: 0;
+  }
+ 
+ 
+ header {
+    background-color: orange;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+   .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+  }
+   .logo a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Allura', cursive;
+    /* text-shadow: 0px 0px 5px #00ffff; */
+    text-shadow: 0px 0px 5px orange;
+    display: inline-block;
+    transition: transform 0.5s ease;
+  }
+   .logo a:hover {
+    transform: rotate(360deg);
+  }
+   nav ul {
+    display: flex;
+  }
+   nav li {
+    margin-right: 20px;
+  }
+   nav a {
+    /* color: #ffffff; */
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: sans-serif;
+    /* text-shadow: 0px 0px 5px #00ffff; */
+    /* text-shadow: 0px 0px 5px white; */
+  }
+   nav a:hover {
+    /* color: #00ffff; */
+    color: black;
+  }
+ 
+ 
+  footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: grey;
+  padding: 20px;
+  }
+ 
+ 
+   .footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+   .footer-column p {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  }
+   .social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+   .social-icons a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin: 0 10px;
+  }
+   .social-icons i {
+  font-size: 24px;
+  color: #333;
+  }
+   .footer-column:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+   .footer-column:nth-child(2) a {
+  color: #555;
+  margin: 10px 0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  }
+   .footer-column:nth-child(2) a:hover {
+  color: #000;
+  }
+ 
