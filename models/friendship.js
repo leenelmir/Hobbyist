@@ -8,8 +8,7 @@ const friendshipSchema = new mongoose.Schema({
     receiver: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Users'
-    },
-    status: String
+    }
   });
 
 const Friendship = mongoose.model("Friendships", friendshipSchema);

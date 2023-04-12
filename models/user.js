@@ -38,7 +38,10 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true
-    }
+    },
+    friends: [{
+        type: String,
+    }]
 });
 userSchema.methods.generateAuthToken = function() {
     return jwt.sign({ _id: this._id}, config.get('jwtPrivateKey'));

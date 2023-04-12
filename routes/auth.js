@@ -3,7 +3,6 @@ const Joi = require("Joi");
 const { User } = require("../models/user");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const config = require("config");

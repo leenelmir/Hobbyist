@@ -4,11 +4,27 @@ const authenticateUser = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
 
-router.post("/request", async (req, res) => {       //NOTE: ADD BACK THE MIDDLEWARE AND CHANGE ANY NECESSARY CODE AFTER TESTING IS DONE
+router.get("", async (req, res) => {
+    try {
+        const senderID = req.body.sender;
+
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send("Server error");
+    }
+
+})
+
+router.post("/request", async (req, res) => {       // NOTE: ADD BACK THE MIDDLEWARE AND CHANGE ANY NECESSARY CODE AFTER TESTING IS DONE
     try
     {
         const senderID = req.body.sender;           // after adding back the middleware, change this to req.user._id
         const receiver = req.body.receiver;
+
+        const senderUser = await User.findOne({     // (2): AFTER ADDING BACK THE MIDDLEWARE, MAKE THE NECESSARY ADJUSTMENTS
+            _id: senderID
+        });
         const receiverUser = await User.findOne({
             username: receiver
         });
@@ -17,28 +33,15 @@ router.post("/request", async (req, res) => {       //NOTE: ADD BACK THE MIDDLEW
             return res.status(400).send("User requesting friendship with does not exist!");
         
         const receiverID = receiverUser._id;
-        const existingFriendship = await Friendship.findOne({
-            $or: [
-                {
-                    sender: senderID,
-                    receiver: receiverID
-                },
-                {
-                    sender: receiverID,
-                    receiver: senderID
-                }
-            ],
-            status: "accepted"
-        });
 
         const existingRequest = await Friendship.findOne({
             sender: senderID,
-            receiver: receiverID,
-            status: "pending"
+            receiver: receiverID
         });
 
+        console.log(senderUser.friends);
 
-        if(existingFriendship) // a friendship is already found between the 2 users
+        if(senderUser.friends.includes(receiverUser.username)) // (2): REPLACE ARGUMENT WITH req.user.username
             return res.status(400).send("Already friends with that user!");
         
         if(existingRequest) // a request has already been sent and is still pending
@@ -46,8 +49,7 @@ router.post("/request", async (req, res) => {       //NOTE: ADD BACK THE MIDDLEW
 
         const newFriendship = new Friendship({
             sender: senderID,
-            receiver: receiverID,
-            status: "pending"
+            receiver: receiverID
         });
 
         await newFriendship.save();
@@ -56,7 +58,50 @@ router.post("/request", async (req, res) => {       //NOTE: ADD BACK THE MIDDLEW
     catch(err)
     {
         console.error(err);
-        res.status(500).send("Server error");
+        return res.status(500).send("Server error");
+    }
+});
+
+router.post("/accept", async (req, res) => {
+    try
+    {
+        const senderID = req.body.sender;
+        const receiver = req.body.receiver;
+
+        const senderUser = await User.findOne({
+            _id: senderID
+        });
+        const receiverUser = await User.findOne({
+            username: receiver
+        });
+
+        if(!senderUser || !receiverUser)
+            return res.status(400).send("Invalid user!");
+        
+        const friendship = await Friendship.findOne({ 
+            sender: senderID,
+            receiver: receiverUser._id
+        });
+
+        if(!friendship)
+            return res.status(400).send("No existing friend request!");
+
+        await Friendship.findOneAndRemove({
+            sender: senderID,
+            receiver: receiverUser._id
+        });
+
+        receiverUser.friends.push(senderUser.username);
+        senderUser.friends.push(receiverUser.username);
+
+        receiverUser.save();
+        senderUser.save();
+        
+        return res.status(200).send("Friendship accepted");
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send("Server error");
     }
 });
 
