@@ -1,6 +1,9 @@
 body {
     /* background-color: black; */
-    background-color: #e3f2fd;
+      /* background-color: black; */
+      /* background-color: #e3f2fd; */
+      background-image: url('https://img.freepik.com/free-vector/paper-style-white-monochrome-background_52683-66443.jpg?t=st=1681385230~exp=1681385830~hmac=b80538b47ef3a950c38640701c6949639603f988984c1fc82d8fa209998eaaed');
+      background-size: cover;
  }
  
  
@@ -159,15 +162,21 @@ body {
     cursor: pointer;
   }
   
-  .show-more p {
-    color: black;
-    font-size: 16px;
-    font-style: italic;
-    text-decoration: underline;
-  }
-  
   .show-more:hover p {
     color: orange;
+    font-style: italic;
   }
+  
+  .show-more button {
+    background-color: orange;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-style: italic;
+    cursor: pointer;
+  }
+  
  
  
