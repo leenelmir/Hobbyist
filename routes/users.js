@@ -36,12 +36,13 @@ router.post("/", async (req, res) => {
         user: user._id,
         description: null,
         profilePicture: null,
-        hobbies: []
+        hobbies: [],
+        gender: 'undefined'
     });
     await profile.save();
     
     const token = jwt.sign({ _id: user._id}, config.get('jwtPrivateKey'));
-    res.cookie("token", token, {httpOnly:true}).status(200).send({"user": _.pick(user, ['_id', 'firstName', 'lastName', 'email', 'phone', 'username']),
+    res.cookie("token", token, {httpOnly:true}).status(200).send({"user": _.pick(user, ['_id', 'firstName', 'lastName', 'email', 'phone', 'username', 'gender']),
     "status": "ok"});
     
 });

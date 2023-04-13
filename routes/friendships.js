@@ -4,7 +4,7 @@ const authenticateUser = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
 
-router.get("", async (req, res) => {
+router.get("", authenticateUser, async (req, res) => {
     try {
         const senderID = req.body.sender;
 

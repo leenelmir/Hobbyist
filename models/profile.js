@@ -8,7 +8,8 @@ const profileSchema = new mongoose.Schema({
     name: String,
     description: String,
     profilePicture: String,
-    hobbies: [String]
+    hobbies: [String],
+    gender : String
   });
 
 const Profile = mongoose.model("Profiles", profileSchema);
