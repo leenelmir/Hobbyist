@@ -55,6 +55,7 @@ header {
 	display: flex;
 	flex-direction: row;
 	height: 100vh;
+    font-family: Arial, sans-serif;
 }
 
 .profile-image-container {
@@ -63,8 +64,6 @@ header {
 	align-items: center;
 	justify-content: center;
 	flex: 1;
-	/* background-image: url('https://img.freepik.com/premium-vector/abstract-modern-white-grey-background-texture-chaotic-polygonal-surface-background-design_266639-1403.jpg?w=996');
-    background-size: cover; */
     background-color: white;
 }
 
@@ -78,11 +77,13 @@ header {
 .profile-name {
 	margin-top: 20px;
 	margin-bottom: 5px;
+    font-family: Arial, sans-serif;
 }
 
 .profile-username {
 	margin-top: 0;
 	color: #999;
+    font-family: Arial, sans-serif;
 }
 
 .edit-profile-button {
@@ -96,6 +97,7 @@ header {
 	font-size: 16px;
 	margin-bottom: 20px;
 	cursor: pointer;
+    border-radius: 20px;
 }
 
 .friend-request-button {
@@ -109,7 +111,7 @@ header {
 	font-size: 16px;
 	margin-bottom: 20px;
 	cursor: pointer;
-    /* transition: opacity 0.1s ease-in-out; */
+    border-radius: 20px;
 }
 
 .friend-request-button:hover {
@@ -136,14 +138,15 @@ header {
 }
 
 .profile-detail {
-	margin-bottom: 20px;
-    /* background-color: rgba(255, 255, 255, 0.8);
-    opacity: 1;
-    padding: 10px; */
+	margin-bottom: 40px;
 }
 
 .profile-detail h3 {
 	margin-top: 0;
+    border-bottom: 2px solid orange;
+    display: inline-block;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
 }
 
 .profile-detail p {
