@@ -1,0 +1,173 @@
+body {
+    /* background-color: black; */
+    background-color: #e3f2fd;
+ }
+ 
+ 
+ header {
+    background-color: orange;
+    height: 109px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+   .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+  }
+
+   .logo a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 35px;
+    /* font-weight: bold; */
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    /* text-shadow: 0px 0px 5px #00ffff; */
+    text-shadow: 0px 0px 5px orange;
+    display: inline-block;
+    transition: transform 0.5s ease;
+  }
+   .logo a:hover {
+    transform: rotate(360deg);
+  }
+   nav ul {
+    display: flex;
+  }
+   nav li {
+    margin-right: 20px;
+  }
+   nav a {
+    /* color: #ffffff; */
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    /* font-weight: bold; */
+    font-family:'Times New Roman', Times, serif;
+    /* text-shadow: 0px 0px 5px #00ffff; */
+    /* text-shadow: 0px 0px 5px white; */
+  }
+   nav a:hover {
+    /* color: #00ffff; */
+    color: black;
+  }
+ 
+ 
+ 
+ 
+  /* Search bar styles */
+ .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 200px;
+  }
+   label {
+    margin-right: 10px;
+  }
+   input[type="text"] {
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+   button {
+    background-color: orange;
+    color: white;
+    border: 2px solid orange;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+   button:hover {
+    background-color: white;
+    color: orange;
+    border-color: orange;
+  }
+   button:focus {
+    outline: none;
+  }
+   @media only screen and (max-width: 768px) {
+    input[type="text"] {
+      width: 150px;
+    }
+  }
+ 
+ 
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+    row-gap: 220px; /* add spacing between rows */
+  }
+   .grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* set the height of the grid items */
+  }
+   .profile-picture {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+  }
+   .user-name {
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    transition: color 0.3s ease-in-out, font-style 0.3s ease-in-out;
+  }
+   .user-name:hover {
+    color: orange;
+    font-style: italic;
+  }
+   .grid-container > :nth-child(4n + 1), /* select every first item in a row */
+  .grid-container > :nth-child(4n + 2), /* select every second item in a row */
+  .grid-container > :nth-child(4n + 3), /* select every third item in a row */
+  .grid-container > :nth-child(4n + 4) /* select every fourth item in a row */
+  {
+    grid-row: span 2; /* span 2 rows for each item */
+  }
+  
+  .profile-picture {
+    width: 40%; /* make the picture a bit smaller */
+    max-width: 200px;
+    height: auto;
+    border-radius: 50%; /* make the picture rounded */
+    border: 2px solid white; /* add a white border */
+  }
+   .profile-picture:hover {
+    transform: scale(1.1); /* magnify the picture by 10% */
+    transition: transform 0.2s ease; /* add a smooth transition effect */
+  }
+  
+  .show-more {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .show-more p {
+    color: black;
+    font-size: 16px;
+    font-style: italic;
+    text-decoration: underline;
+  }
+  
+  .show-more:hover p {
+    color: orange;
+  }
+ 
+ 
