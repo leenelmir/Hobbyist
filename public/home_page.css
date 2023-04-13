@@ -44,7 +44,7 @@ main {
     /* background-color: black; */
     background-color: #e3f2fd;/*********************************************************/
     /* border-bottom: 1px solid white; */
-    border-bottom: 1px solid lightcoral;
+    border-bottom: 1px solid orange;
     box-sizing: border-box;
     padding: 20px;
     display: flex;
@@ -55,8 +55,8 @@ main {
     order: 2;
 
     margin-right: 0;
-    margin-left: 20px;
-    text-align: right;
+    margin-left: 400px;
+    text-align: left;
   }
   
   .block:nth-child(2n) img {
@@ -75,7 +75,7 @@ main {
   .block-text {
     color: black;
     font-size: 1.8em; 
-    font-family: 'Shrikhand', cursive;
+    font-family: Times New Roman;
     text-align: left;
     margin-right: 20px;
     flex-grow: 1;
@@ -111,7 +111,7 @@ main {
     color: #ffffff;
     text-decoration: none;
     font-size: 35px;
-    font-weight: bold;
+    /* font-weight: bold; */
     font-family: 'Allura', cursive;
     /* text-shadow: 0px 0px 5px #00ffff; */
     text-shadow: 0px 0px 5px orange;
@@ -132,7 +132,7 @@ main {
     color: white;
     text-decoration: none;
     font-size: 20px;
-    font-weight: bold;
+    /* font-weight: bold; */
     font-family: sans-serif;
     /* text-shadow: 0px 0px 5px #00ffff; */
     /* text-shadow: 0px 0px 5px white; */
@@ -150,7 +150,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: lightsalmon;
+  background-color: orange;
   padding: 20px;
   }
  
@@ -161,7 +161,7 @@ main {
   align-items: center;
   }
    .footer-column p {
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 18px;
   margin: 0 0 10px 0;
   }
@@ -191,7 +191,7 @@ main {
   margin: 10px 0;
   text-decoration: none;
   font-size: 14px;
-  font-weight: bold;
+  /* font-weight: bold; */
   text-transform: uppercase;
   }
    .footer-column:nth-child(2) a:hover {
