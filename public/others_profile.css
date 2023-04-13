@@ -2,6 +2,9 @@
 body {
 	margin: 0;
 	padding: 0;
+    background-image: url("https://images.squarespace-cdn.com/content/v1/57b48f0de4fcb59cf4918662/1542211584127-00VY1F22708P63992EED/creative-white-background-websites-editing-picsart-endear-images-for.jpg?format=2500w");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 header {
     background-color: orange;
@@ -22,7 +25,7 @@ header {
     text-decoration: none;
     font-size: 35px;
     /* font-weight: bold; */
-    font-family: 'Allura', cursive;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     /* text-shadow: 0px 0px 5px #00ffff; */
     text-shadow: 0px 0px 5px orange;
     display: inline-block;
@@ -41,9 +44,8 @@ header {
     /* color: #ffffff; */
     color: white;
     text-decoration: none;
-    font-size: 35px;
-    /* font-weight: bold; */
-    font-family: 'Allura', cursive;
+    font-size: 20px;
+    font-family:'Times New Roman', Times, serif;
   }
    nav a:hover {
     /* color: #00ffff; */
@@ -61,7 +63,9 @@ header {
 	align-items: center;
 	justify-content: center;
 	flex: 1;
-	background-color: #f0f0f0;
+	/* background-image: url('https://img.freepik.com/premium-vector/abstract-modern-white-grey-background-texture-chaotic-polygonal-surface-background-design_266639-1403.jpg?w=996');
+    background-size: cover; */
+    background-color: white;
 }
 
 .profile-image {
@@ -110,13 +114,20 @@ header {
 
 .friend-request-button:hover {
 	background-color: grey;
-  color: white;
-  transition: background-color 0.5s ease;
+    color: white;
+    transition: background-color 0.5s ease;
+}
+
+.edit-profile-button:hover {
+	background-color: grey;
+    color: white;
+    transition: background-color 0.5s ease;
 }
 
 .profile-info-container {
 	flex: 3;
 	padding: 30px;
+    margin-top: 130px;
 }
 
 .profile-details-container {
@@ -126,6 +137,9 @@ header {
 
 .profile-detail {
 	margin-bottom: 20px;
+    /* background-color: rgba(255, 255, 255, 0.8);
+    opacity: 1;
+    padding: 10px; */
 }
 
 .profile-detail h3 {
@@ -136,3 +150,9 @@ header {
 	margin-top: 0;
 	color: #555;
 }
+
+.profile-details-box {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+  }
