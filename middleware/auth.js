@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 
 const authenticateUser = (req, res, next) => {
-  const token = req.cookies.token; // CHANGE
+  const token = req.cookies.token; 
 
   if (token == null) {
     return res.sendStatus(401);

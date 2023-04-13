@@ -3,7 +3,7 @@
     <head>
         <title>Profile Page</title>
         <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="others_profile.css">
+        <link rel="stylesheet" type="text/css" href="/others_profile.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -29,24 +29,49 @@
 	<div class="profile-container">
 		<div class="profile-image-container">
 			<img class="profile-image" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1681374148~exp=1681374748~hmac=1395d44da9f57e623b892e76b262cb2befe66d60df997fc933a7975050e57426" alt="Profile Picture">
-			<h1 class="profile-name">John Doe</h1>
-			<h3 class="profile-username">@johndoe</h3>
-            <button class="edit-profile-button">Edit profile</button>
-			<button class="friend-request-button">Send Friend Request</button>
+			<h1 class="profile-name"><%=profile.user.firstName + " " + profile.user.lastName%></h1>
+			<h3 class="profile-username"> <%="@"+profile.user.username%></h3>
+            <button class="edit-profile-button" id="edit-profile-button">Edit profile</button>
+			<button class="friend-request-button" id="friend-request-button">Send Friend Request</button>
+			<script> 
+			if ('<%= currentUserId %>' === '<%=requestedUserId%>') 
+			document.getElementById('friend-request-button').style.display = "none";
+			else document.getElementById('edit-profile-button').style.display = "none";
+			</script>
 		</div>
 		<div class="profile-info-container">
 			<div class="profile-details-container">
 				<div class="profile-detail">
 					<h3>Hobbies:</h3>
-					<p>Reading, writing, hiking</p>
+					<p id="hobbies-list"> <script> // FIX
+						const hobbiesArray = '<%=profile.user.hobbies%>';
+						const hobbiesList = document.getElementById('hobbies-list');
+						if (hobbiesArray.length === 0){
+							hobbiesList.innerHTML = "N/A";
+						}
+						else for (let i = 0; i < hobbiesArray.length; i++) {
+							hobbiesList.innerHTML += hobbiesArray[i] + "<br>";
+						}
+					</script>
+					</p>
 				</div>
 				<div class="profile-detail">
 					<h3>Description:</h3>
-					<p>Hi there, I'm John Doe and I love to explore new places and meet new people. I'm an aspiring writer and enjoy spending my free time reading and writing.</p>
+					<p id="description"> <script> 
+						const profileDesc = '<%=profile.description%>';
+						const desc = document.getElementById('description');
+						if (!profileDesc)
+							 desc.innerHTML = "N/A";
+						else 
+							 desc.innerHTML = profileDesc;
+					</script>
+					</p>
 				</div>
 				<div class="profile-detail">
 					<h3>Location:</h3>
-					<p>San Francisco, CA</p>
+					<p>
+						
+					</p>
 				</div>
 				<div class="profile-detail">
 					<h3>Gender:</h3>
@@ -56,4 +81,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

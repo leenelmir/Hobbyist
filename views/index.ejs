@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css"> 
   </head>
   <body>
     
@@ -65,10 +65,10 @@
                 invalid.style.display = 'block';
               }
               else {
+                const username = data.data.username;
                 invalid.textContent = "Login successful. Logging in...";
                 invalid.style.display = 'block';
-            //    setTimeout(function() { window.location.href = '/welcome';}, 10000);
-              
+                setTimeout(function() { window.location.href = 'profile/' + username;}, 2000);
               }
           })
             

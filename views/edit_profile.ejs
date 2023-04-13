@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Profile Page</title>
-    <link rel="stylesheet" type="text/css" href="profile_page.css">
-    <script src="city_dictionary.js"></script>
+    <link rel="stylesheet" type="text/css" href="/profile_page.css">
+    <script src="/city_dictionary.js"></script>
     <style>
 
         body {
@@ -49,7 +49,9 @@
   </head>
   <body>
     <div class="form-container" style="max-width: 600px; margin: 0 auto;">
-      <h2 style="text-align: center; font-family: 'Lucida Handwriting', cursive; font-size: 40px; color: #FFA500;">My Profile</h2>
+      <h2 style="text-align: center; font-family: 'Lucida Handwriting', cursive; font-size: 40px; color: #FFA500;"> 
+        My Profile
+      </h2>
       <form id="profileForm" enctype="multipart/form-data">
         <input type="file" id="imageInput">
         <div class="container">
@@ -149,4 +151,50 @@
       </form>
     </div>
   </body>
+
+  <script>
+    const user = currentProfile;
+    // set the fields of everything not null
+
+    const form = document.getElementById('ProfileForm');
+
+    form.addEventListener('submit', function (event) {
+
+      event.preventDefault(); // submitted are first name, last name, hobbies, description, location, gender
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const hobbies = [];
+      const checkboxes = document.querySelectorAll('input[type="checkbox"][name="hobby"]'); // returns list of checkboxes
+      checkboxes.forEach((cb) => {if (cb.checked) hobbies.push(cb.value);});
+      const description = document.getElementById('description').value;
+      const gender = document.getElementById('gender').value;
+      const location = document.getElementById('location').value;
+   
+          fetch('/?', {
+            method: 'POST',
+            body: JSON.stringify({
+              username : username,
+              password : password
+            }),
+            headers: {"Content-Type":"application/json; charset=UTF-8" }
+          })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status != 'ok')  {
+              invalid.textContent = data.status;
+              invalid.style.display = 'block';
+            }
+            else {
+              invalid.textContent = "Login successful. Logging in...";
+              invalid.style.display = 'block';
+          //    setTimeout(function() { window.location.href = '/welcome';}, 10000);
+            
+            }
+        })
+          
+        }
+      );
+    
+  </script> <!-- FIX THIS -->
+  
 </html>
