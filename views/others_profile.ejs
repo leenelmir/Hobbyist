@@ -12,7 +12,7 @@
      <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Tilt+Prism&display=swap" rel="stylesheet">
     </head>
 <header>
-    <div class="logo">
+    <div class="logo"> <!--FIX-->
       <a href="#">Hobbyist</a>
     </div>
     <nav>
@@ -106,7 +106,7 @@
 			<div class="profile-details-container">
 				<div class="profile-detail">
 					<h3>Hobbies</h3>
-					<p id="hobbies-list"> <script> // FIX
+					<p id="hobbies-list"> <script> 
 						const hobbiesArray = '<%=otherProfile.hobbies%>';
 						const hobbiesList = document.getElementById('hobbies-list');
 						if (hobbiesArray.length === 0) hobbiesList.innerText = "N/A"

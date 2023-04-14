@@ -114,25 +114,25 @@
         <div class="form-group">
             <label>Hobbies</label>
             <div class="checkboxes">
-              <label><input type="checkbox" name="hobby" value="coding">Coding</label>
-              <label><input type="checkbox" name="hobby" value="reading">Reading</label>
-              <label><input type="checkbox" name="hobby" value="painting">Painting</label>
-              <label><input type="checkbox" name="hobby" value="gaming">Gaming</label>
-              <label><input type="checkbox" name="hobby" value="hiking">Hiking</label>
-              <label><input type="checkbox" name="hobby" value="dancing">Dancing</label>
-              <label><input type="checkbox" name="hobby" value="singing">Singing</label>
-              <label><input type="checkbox" name="hobby" value="traveling">Traveling</label>
-              <label><input type="checkbox" name="hobby" value="shopping">Shopping</label>
-              <label><input type="checkbox" name="hobby" value="exercising">Exercising</label>
-              <label><input type="checkbox" name="hobby" value="drawing">Drawing</label>
-              <label><input type="checkbox" name="hobby" value="cooking">Cooking</label>
+              <label><input type="checkbox" name="hobby" value="coding" <%=myProfile.hobbies.includes("coding") ? "checked" : ""%>>Coding</label>
+              <label><input type="checkbox" name="hobby" value="reading" <%=myProfile.hobbies.includes("reading") ? "checked" : ""%>>Reading</label>
+              <label><input type="checkbox" name="hobby" value="painting" <%=myProfile.hobbies.includes("painting") ? "checked" : ""%>>Painting</label>
+              <label><input type="checkbox" name="hobby" value="gaming" <%=myProfile.hobbies.includes("gaming") ? "checked" : ""%>>Gaming</label>
+              <label><input type="checkbox" name="hobby" value="hiking" <%=myProfile.hobbies.includes("hiking") ? "checked" : ""%>>Hiking</label>
+              <label><input type="checkbox" name="hobby" value="dancing" <%=myProfile.hobbies.includes("dancing") ? "checked" : ""%>>Dancing</label>
+              <label><input type="checkbox" name="hobby" value="singing" <%=myProfile.hobbies.includes("singing") ? "checked" : ""%>>Singing</label>
+              <label><input type="checkbox" name="hobby" value="traveling" <%=myProfile.hobbies.includes("traveling") ? "checked" : ""%>>Traveling</label>
+              <label><input type="checkbox" name="hobby" value="shopping" <%=myProfile.hobbies.includes("shopping") ? "checked" : ""%>>Shopping</label>
+              <label><input type="checkbox" name="hobby" value="exercising" <%=myProfile.hobbies.includes("exercising") ? "checked" : ""%>>Exercising</label>
+              <label><input type="checkbox" name="hobby" value="drawing" <%=myProfile.hobbies.includes("drawing") ? "checked" : ""%>>Drawing</label>
+              <label><input type="checkbox" name="hobby" value="cooking" <%=myProfile.hobbies.includes("cooking") ? "checked" : ""%>>Cooking</label>
             </div>
           </div>
           
           
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea id="description" name="description" rows="4" cols="50" placeholder="Tell us about yourself" style="min-width: 600px; max-width:600px"></textarea>
+          <textarea id="description" name="description" rows="4" cols="50" style="min-width: 600px; max-width:600px"><%=myProfile.description%></textarea>
         </div>
         <div class="form-group">
           <label for="location">Location</label>
@@ -145,14 +145,19 @@
                   document.write('<option value="' + key + '">' + citydictionary[key] + '</option>');
                 }
               }
+              const profileLocation = '<%=myProfile.location%>';
+              const locationSelect = document.getElementById('location');
+              if (profileLocation != "N/A") {
+                locationSelect.value = profileLocation;
+              }
             </script>
           </select>
         </div>
         <div class="form-group">
-          <label for="gender">Gender</label>
+          <label for="gender">Gender</label> 
           <select id="gender" name="gender">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="Male" <%= myProfile.gender === 'Male' ? 'selected' : '' %>>Male</option>
+            <option value="Female" <%= myProfile.gender === 'Female' ? 'selected' : '' %>>Female</option>
           </select>
         </div>
         <div class="message">
