@@ -121,4 +121,42 @@ router.post("/accept", async (req, res) => {
     }
 });
 
+router.post("/reject", async (req, res) => {
+    try
+    {
+        const senderID = req.body.sender;
+        const receiver = req.body.receiver;
+
+        const senderUser = await User.findOne({
+            _id: senderID
+        });
+        const receiverUser = await User.findOne({
+            username: receiver
+        });
+
+        if(!senderUser || !receiverUser)
+            return res.status(400).send("Invalid user!");
+        
+        const friendship = await Friendship.findOne({ 
+            sender: senderID,
+            receiver: receiverUser._id
+        });
+
+        if(!friendship)
+            return res.status(400).send("No existing friend request!");
+
+        await Friendship.findOneAndRemove({
+            sender: senderID,
+            receiver: receiverUser._id
+        });
+        
+        return res.status(200).send("Friendship declined!");
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send("Server error");
+    }
+});
+
+
 module.exports = router;
