@@ -29,22 +29,85 @@
 	<div class="profile-container">
 		<div class="profile-image-container">
 			<img class="profile-image" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1681374148~exp=1681374748~hmac=1395d44da9f57e623b892e76b262cb2befe66d60df997fc933a7975050e57426" alt="Profile Picture">
-			<h1 class="profile-name"><%=profile.user.firstName + " " + profile.user.lastName%></h1>
-			<h3 class="profile-username"> <%="@"+profile.user.username%></h3>
+			<h1 class="profile-name"><%=otherProfile.user.firstName + " " + otherProfile.user.lastName%></h1>
+			<h3 class="profile-username"> <%="@"+otherProfile.user.username%></h3>
             <button class="edit-profile-button" id="edit-profile-button">Edit profile</button>
+			
 			<button class="friend-request-button" id="friend-request-button">Send Friend Request</button>
+			<div id="error-message" style="display: none;"></div>
 			<script> 
-			if ('<%= currentUserId %>' === '<%=requestedUserId%>') 
+			if ('<%= currentUserId %>' === '<%=requestedUserId%>'){
 			document.getElementById('friend-request-button').style.display = "none";
-			else document.getElementById('edit-profile-button').style.display = "none";
+			const editProfileButton = document.getElementById('edit-profile-button');
+				editProfileButton.addEventListener('click', (event) => {
+					event.preventDefault();
+					window.location.href = 'edit/';
+				});
+			}
+			else {
+			document.getElementById('edit-profile-button').style.display = "none";
+			// check if already a friend FIX
+			const friends = '<%=JSON.stringify(otherProfile.user.friends)%>';
+			const friendReqButton = document.getElementById('friend-request-button');
+			if (friends.includes('<%=myProfile.user.username%>')) {
+				friendReqButton.textContent = "Already Friends";
+				friendReqButton.disabled = true;
+			}
+			// check if pending , else give option to add friend
+			else {
+				
+				fetch('/api/friendships/check-request', {
+					method: 'POST',
+					headers: {"Content-Type":"application/json; charset=UTF-8"},
+					body: JSON.stringify({
+							myUserId: '<%=myProfile.user._id%>',
+							otherUserId: '<%=otherProfile.user._id%>'
+							})
+						})
+						.then(response => response.json())
+						.then(data => {
+						if (data.status === "Request pending!") {
+							friendReqButton.textContent = "Request pending...";
+							friendReqButton.disabled = true;
+						} else if (data.status === "Not friends!") {
+							friendReqButton.textContent = "Add friend";	
+								
+								friendReqButton.addEventListener("click", (event) =>{
+									event.preventDefault();
+									fetch('/api/friendships/request/', {
+										method: 'POST',
+										headers: {"Content-Type":"application/json; charset=UTF-8"},
+										body: JSON.stringify({
+											sender: '<%=myProfile.user._id%>',
+											receiver: '<%=otherProfile.user._id%>'
+										})
+									})
+									.then(response => response.json())
+									.then(data => {
+										if (data.status === 'Request successfully sent!'){
+											friendReqButton.textContent = "Request pending...";
+											friendReqButton.disabled = true;
+										}
+									}).catch(error => {
+										const errorMessage = document.getElementById('error-message');
+										errorMessage.textContent = 'Failed to send friend request!' + error.message;
+										errorMessage.style.display = 'block';
+									})
+								})
+							
+							}
+						}).catch(error => console.error(error));
+						}		
+				}
+			
 			</script>
 		</div>
 		<div class="profile-info-container">
 			<div class="profile-details-container">
 				<div class="profile-detail">
-					<h3>Hobbies:</h3>
+					<h3>Hobbies</h3>
 					<p id="hobbies-list"> <script> // FIX
-						const hobbiesArray = '<%=profile.user.hobbies%>';
+						const hobbiesArray = '<%=otherProfile.user.hobbies%>';
 						const hobbiesList = document.getElementById('hobbies-list');
 						if (hobbiesArray.length === 0){
 							hobbiesList.innerHTML = "N/A";
@@ -56,26 +119,24 @@
 					</p>
 				</div>
 				<div class="profile-detail">
-					<h3>Description:</h3>
+					<h3>Description</h3>
 					<p id="description"> <script> 
-						const profileDesc = '<%=profile.description%>';
-						const desc = document.getElementById('description');
-						if (!profileDesc)
-							 desc.innerHTML = "N/A";
-						else 
-							 desc.innerHTML = profileDesc;
+						document.getElementById('description').innerHTML = '<%=otherProfile.description%>';
 					</script>
 					</p>
 				</div>
 				<div class="profile-detail">
-					<h3>Location:</h3>
-					<p>
-						
+					<h3>Location</h3>
+					<p id="location"><script>
+						document.getElementById('location').innerHTML = '<%=otherProfile.location%>';
+					</script>
 					</p>
 				</div>
 				<div class="profile-detail">
-					<h3>Gender:</h3>
-					<p>Male</p>
+					<h3>Gender</h3>
+					<p id="gender"> <script>
+						document.getElementById('gender').innerHTML = '<%=otherProfile.gender%>';
+					</script></p>
 				</div>
 			</div>
 		</div>

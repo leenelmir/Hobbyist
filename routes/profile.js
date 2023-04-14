@@ -18,7 +18,7 @@ router.get("/edit", authenticateUser, async (req, res) => {
           return res.status(404).send("Profile was not found!");
       }
 
-      res.send("ALL GOOD");
+      res.status(200).render('edit_profile');
   }
   catch (error) {
       return res.status(500).json({ error: 'Server error' });
@@ -68,13 +68,14 @@ router.post("/", authenticateUser, async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
   
-    const profile = await Profile.findOne({ user: user._id }).populate('user');
-    if (!profile) {
+    const otherProfile = await Profile.findOne({ user: user._id }).populate('user');
+    if (!otherProfile) {
       return res.status(404).json({ error: 'Profile not found' });
     }
   
-    return res.status(200).render('others_profile.ejs', {profile: profile, currentUserId: req.user._id,
-    requestedUserId: user._id});
+    const myProfile = await Profile.findOne({user: req.user._id}).populate('user');
+    return res.status(200).render('others_profile.ejs', {otherProfile: otherProfile, currentUserId: req.user._id,
+    requestedUserId: user._id, myProfile : myProfile});
   
   } catch (error) { 
     console.error(error);

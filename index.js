@@ -6,16 +6,17 @@ const auth = require("./routes/auth");
 const profile = require("./routes/profile");
 const friendship = require("./routes/friendships");
 const bodyparse = require('body-parser');
+const cookieParser = require("cookie-parser");
 const config = require("config");
 const app = express();
 const cors = require('cors');
+app.use(cookieParser());
 app.use(express.static("public"))
 app.use(cors({ exposedHeaders: 'x-auth-token' }))
 app.set('view engine', 'ejs');
 app.use(bodyparse.json());
 app.use(express.json());
 app.use(bodyparse.urlencoded( { extended: true }));
-;
 
 if(!config.has("jwtPrivateKey")){
     console.error("FATAL ERROR: jwtPrivateKey is not defined.");
