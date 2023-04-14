@@ -23,11 +23,10 @@ app.use(cookieParser());
 app.use(express.static("public"))
 app.use(cors({ exposedHeaders: 'x-auth-token' }))
 app.set('view engine', 'ejs');
-app.use(bodyparse.json());
+app.use(bodyparse.json({ limit: '10mb' }));
 app.use(express.json());
-app.use(bodyparse.urlencoded( { extended: true }));
+app.use(bodyparse.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.static(path.join(__dirname, "public")))
-
 const botName = "Hobbyist Bot";
 
 

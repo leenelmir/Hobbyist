@@ -25,6 +25,22 @@ router.get("/edit", authenticateUser, async (req, res) => {
   }
 });
 
+router.post("/edit/update-profile-image", authenticateUser, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({user : req.user._id});
+    if (!profile){
+      return res.status(400).json({status : "Profile not found!"})
+    }
+    profile.profilePicture = req.body.profilePicture;
+    await profile.save();
+    return res.status(200).json({status : "profile updated"})
+  }
+  catch (err) {
+    console.error();
+  }
+})
+
+
 router.post("/edit", authenticateUser, async (req, res) => {
     try {
       const userId = req.body.id;
@@ -34,27 +50,36 @@ router.post("/edit", authenticateUser, async (req, res) => {
       }
       
       if (req.body.hasOwnProperty("description")) {
-        profile.description = req.body.description;
+        if (req.body.description.length === 0)
+          profile.description = "N/A"
+        else profile.description = req.body.description;
       }
-      if (req.body.hasOwnProperty("profilePicture")) {
-        profile.profilePicture = req.body.profilePicture;
-      }
+
       if (req.body.hasOwnProperty("hobbies")) {
         const tempHobbies = [];
         const hobbies = req.body.hobbies;
-        for (let i = 0; i < hobbies.length; i++) {
+        if(hobbies.length === 0) 
+          profile.hobbies = "N/A"; 
+        else {for (let i = 0; i < hobbies.length; i++) {
           tempHobbies.push(hobbies[i]);
         }
         profile.hobbies = tempHobbies;
       }
+      }
 
       if (req.body.hasOwnProperty("location")){
-        profile.location = req.body.location;
+        if (req.body.location.length === 0)
+          profile.location = "N/A"
+        else 
+          profile.location = req.body.location;
       }
 
       if (req.body.hasOwnProperty("gender")){
-        profile.gender = req.body.gender;
-      }
+        if (req.body.gender.length === 0)
+          profile.gender = "N/A"
+        else 
+          profile.gender = req.body.gender;
+}
 
   
       await profile.save();

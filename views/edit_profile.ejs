@@ -55,7 +55,7 @@
       <form id="profileForm" enctype="multipart/form-data">
         <input type="file" id="imageInput">
         <div class="container">
-          <img id="avatar" src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="Avatar" style="width:200px">
+          <img id="avatar" src=<%=myProfile.profilePicture%> alt="Avatar" style="width:200px">
         </div>
           <script>
           const imageInput = document.getElementById('imageInput');
@@ -71,18 +71,32 @@
             logoImg.style.display = 'none';
           });
     
-
           avatarImg.addEventListener('click', () => {
+            alert('You cannot revert back to your old profile picture once a new image is selected!')
             imageInput.click();
           });
           imageInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = (event) => {
-              const imageDataUrl = event.target.result;
-              avatarImg.src = imageDataUrl;
-            };
+            if (file && file.type.startsWith('image/')) {
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onload = (event) => {
+                const imageDataUrl = event.target.result;
+                avatarImg.src = imageDataUrl;
+                fetch('/profile/edit/update-profile-image', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ profilePicture: imageDataUrl })
+                })
+                .catch(error => {
+                  console.error(error);
+                });
+              };
+            } else {
+              alert('Please select an image file.');
+            }
           });
           </script>
         <div class="form-group">

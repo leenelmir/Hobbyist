@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
     const profile = new Profile({
         user: user._id,
         description: 'N/A',
-        profilePicture: null,
+        profilePicture: "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png",
         hobbies: [],
         gender: 'N/A',
         location: 'N/A'

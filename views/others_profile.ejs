@@ -28,7 +28,7 @@
     <body>
 	<div class="profile-container">
 		<div class="profile-image-container">
-			<img class="profile-image" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1681374148~exp=1681374748~hmac=1395d44da9f57e623b892e76b262cb2befe66d60df997fc933a7975050e57426" alt="Profile Picture">
+			<img class="profile-image" src=<%=otherProfile.profilePicture%> alt="Profile Picture">
 			<h1 class="profile-name"><%=otherProfile.user.firstName + " " + otherProfile.user.lastName%></h1>
 			<h3 class="profile-username"> <%="@"+otherProfile.user.username%></h3>
             <button class="edit-profile-button" id="edit-profile-button">Edit profile</button>
@@ -109,7 +109,8 @@
 					<p id="hobbies-list"> <script> // FIX
 						const hobbiesArray = '<%=otherProfile.hobbies%>';
 						const hobbiesList = document.getElementById('hobbies-list');
-						hobbiesList.innerText = hobbiesArray;
+						if (hobbiesArray.length === 0) hobbiesList.innerText = "N/A"
+						else hobbiesList.innerText = hobbiesArray;
 					</script>
 					</p>
 				</div>
