@@ -107,14 +107,9 @@
 				<div class="profile-detail">
 					<h3>Hobbies</h3>
 					<p id="hobbies-list"> <script> // FIX
-						const hobbiesArray = '<%=otherProfile.user.hobbies%>';
+						const hobbiesArray = '<%=otherProfile.hobbies%>';
 						const hobbiesList = document.getElementById('hobbies-list');
-						if (hobbiesArray.length === 0){
-							hobbiesList.innerHTML = "N/A";
-						}
-						else for (let i = 0; i < hobbiesArray.length; i++) {
-							hobbiesList.innerHTML += hobbiesArray[i] + "<br>";
-						}
+						hobbiesList.innerText = hobbiesArray;
 					</script>
 					</p>
 				</div>

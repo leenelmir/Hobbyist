@@ -15,27 +15,24 @@ router.get("/edit", authenticateUser, async (req, res) => {
       const profile = await Profile.findOne({ user: userId }).populate('user');
       if(!profile)
       {
-          return res.status(404).send("Profile was not found!");
+          return res.status(404).json({status: "Profile was not found!"});
       }
 
-      res.status(200).render('edit_profile');
+      res.status(200).render('edit_profile', {myProfile : profile});
   }
   catch (error) {
       return res.status(500).json({ error: 'Server error' });
   }
 });
 
-router.post("/", authenticateUser, async (req, res) => {
+router.post("/edit", authenticateUser, async (req, res) => {
     try {
       const userId = req.body.id;
       const profile = await Profile.findOne({ user: userId });
       if (!profile) {
-        return res.status(404).send("Profile was not found!");
+        return res.status(404).json({status: "Profile was not found!"});
       }
-  
-      if (req.body.hasOwnProperty("name")) {
-        profile.name = req.body.name;
-      }
+      
       if (req.body.hasOwnProperty("description")) {
         profile.description = req.body.description;
       }
@@ -43,15 +40,26 @@ router.post("/", authenticateUser, async (req, res) => {
         profile.profilePicture = req.body.profilePicture;
       }
       if (req.body.hasOwnProperty("hobbies")) {
-        profile.hobbies = req.body.hobbies;
+        const tempHobbies = [];
+        const hobbies = req.body.hobbies;
+        for (let i = 0; i < hobbies.length; i++) {
+          tempHobbies.push(hobbies[i]);
+        }
+        profile.hobbies = tempHobbies;
       }
 
       if (req.body.hasOwnProperty("location")){
         profile.location = req.body.location;
       }
+
+      if (req.body.hasOwnProperty("gender")){
+        profile.gender = req.body.gender;
+      }
+
   
       await profile.save();
-      res.render("profile", { profile });
+      res.status(200).json({ profile : profile, status : "profile updated"});
+
     } catch (err) {
       console.error(err);
       res.status(500).send("Server error");
