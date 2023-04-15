@@ -2,6 +2,8 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: Arial, sans-serif;
+    background-image: url('https://img.freepik.com/free-vector/flat-hand-drawn-wavy-colored-groovy-background_23-2148848394.jpg?w=996&t=st=1681569823~exp=1681570423~hmac=7234a3abb4debf9ef0520a8736e90e0dc1511c3f24b93b6cddfaedc78c6efa4a');
+    background-size: cover;
 }
 
 header {
@@ -20,9 +22,13 @@ h1 {
 a {
     text-decoration: none;
   }
+  
 .friend-requests-heading {
     color: orange;
+    border-bottom: 1px solid orange;
+    padding-bottom: 20px;
   }
+
 
 button#sidebar-toggle {
 	background-color: white;
@@ -66,7 +72,8 @@ aside#sidebar {
 	display: none;
 	width: 400px;
 	height: 100%;
-	background-color: #333;
+    background-image: url('https://img.freepik.com/free-vector/floral-ornamental-abstract-background_52683-30016.jpg?w=996&t=st=1681569685~exp=1681570285~hmac=7e704570e7663e248d36f2e9113f3ebfc556be2d41fc135fe7e06ba631e4fd4f');
+    background-size: cover;
 	color: #fff;
 	padding: 20px;
 	transition: right 0.5s ease;
@@ -158,7 +165,7 @@ li {
   }
   
   #sidebar li:not(:last-child) {
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid orange;
     padding-bottom: 10px;
     margin-bottom: 10px;
   }
