@@ -62,15 +62,12 @@ router.post("/", async (req, res) => {
 
 router.post("/logout", authenticateUser, (req, res) => {
     try {
-        req.cookie.token
-        res.status(200).json({ status: "Logged out successfully"});
+    res.clearCookie('token').status(200).send({status:'Token cookie has been cleared.'});
     }
-    catch (err)
-    {
-        console.error(err);
-        return res.status(500).json({ status : "Server error" });
+    catch (err) {
+    console.error();
+    res.status(500).send({status:'Interal server error'})
     }
- 
-});
+})
 
 module.exports = router;
