@@ -60,15 +60,9 @@
           <script>
           const imageInput = document.getElementById('imageInput');
           const avatarImg = document.getElementById('avatar');
-          const logoImg = document.getElementById('logo');
 
           avatarImg.addEventListener('mouseover', () => {
             avatarImg.style.cursor = 'pointer';
-            logoImg.style.display = 'block';
-          });
-          
-          avatarImg.addEventListener('mouseout', () => {
-            logoImg.style.display = 'none';
           });
     
           avatarImg.addEventListener('click', () => {
@@ -132,7 +126,21 @@
           
         <div class="form-group">
           <label for="description">Description</label>
+<<<<<<< Updated upstream
           <textarea id="description" name="description" rows="4" cols="50" style="min-width: 600px; max-width:600px" required><%=myProfile.description%></textarea>
+=======
+          <textarea id="description" name="description" rows="4" cols="50" style="min-width: 600px; max-width:600px"></textarea>
+          <script>
+            
+            const encodedDescription = '<%=myProfile.description%>';
+            const decodedDescription = unescape(encodedDescription);
+            const descriptionTextarea = document.getElementById('description');
+            console.log("\n"+decodedDescription);
+            const replacedDescription = decodedDescription.replace(/&lt;br&gt;/g, "\r\n");
+            console.log("\n"+replacedDescription);
+            descriptionTextarea.innerHTML = replacedDescription;
+          </script>
+>>>>>>> Stashed changes
         </div>
         <div class="form-group">
           <label for="location">Location</label>
@@ -173,11 +181,15 @@
     const form = document.getElementById('saveButton');
 
     form.addEventListener('click', function (event) {
-      event.preventDefault(); // submitted are hobbies, description, location, gender
+      event.preventDefault(); // submitted are hobbies, description, location
       const hobbies = [];
       const checkboxes = document.querySelectorAll('input[type="checkbox"][name="hobby"]'); // returns list of checkboxes
       checkboxes.forEach((cb) => {if (cb.checked) hobbies.push(cb.value);});
+<<<<<<< Updated upstream
       const description = document.getElementById('description').value;
+=======
+      const description = document.getElementById('description').value.replace(/\n/g, "<br>");
+>>>>>>> Stashed changes
       const location = document.getElementById('location').value;
    
           fetch('/profile/edit', {

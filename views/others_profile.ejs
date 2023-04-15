@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Profile Page</title>
+		<script src="https://cdn.jsdelivr.net/npm/he/he.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/others_profile.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -117,7 +118,9 @@
 				<div class="profile-detail">
 					<h3>Description</h3>
 					<p id="description"> <script> 
-						document.getElementById('description').innerHTML = '<%=otherProfile.description%>';
+
+					var myString = he.decode('<%=otherProfile.description%>');
+					document.getElementById("description").innerHTML = myString.replace(/\n/g, "<br>");
 					</script>
 					</p>
 				</div>

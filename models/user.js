@@ -35,10 +35,6 @@ const userSchema = new mongoose.Schema({
         minlength: 8,
         maxlength: 1024
     },
-    phone: {
-        type: String,
-        required: true
-    },
     friends: [{
         type: String,
     }]
@@ -56,8 +52,7 @@ function validateUser(user) {
         lastName: Joi.string().min(1).max(50).required(),
         username: Joi.string().min(3).max(255).required(),
         email: Joi.string().min(5).max(255).required().email(),
-        password: Joi.string().min(8).max(1024).required(),
-        phone:Joi.string().required()
+        password: Joi.string().min(8).max(1024).required()
     });
    
 
@@ -74,8 +69,6 @@ function validateUser(user) {
             return "Password is invalid or missing : must be at least 8 letters";
         } if (error.path.includes("username")) {
             return "Username is invalid or missing";
-        } if (error.path.includes("phone")) {
-            return "Phone is invalid or missing";
         }
     }
     }
