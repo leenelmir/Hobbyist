@@ -2,9 +2,11 @@
 body {
 	margin: 0;
 	padding: 0;
-    background-image: url("https://images.squarespace-cdn.com/content/v1/57b48f0de4fcb59cf4918662/1542211584127-00VY1F22708P63992EED/creative-white-background-websites-editing-picsart-endear-images-for.jpg?format=2500w");
+    background-image: url('https://img.freepik.com/free-vector/paper-style-white-monochrome-background_52683-66443.jpg?t=st=1681385230~exp=1681385830~hmac=b80538b47ef3a950c38640701c6949639603f988984c1fc82d8fa209998eaaed');
     background-size: cover;
     background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
 }
 header {
     background-color: orange;
@@ -64,7 +66,7 @@ header {
 	align-items: center;
 	justify-content: center;
 	flex: 1;
-    background-color: white;
+    background-color: #f0f0f0;
 }
 
 .profile-image {

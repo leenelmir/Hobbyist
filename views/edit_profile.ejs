@@ -114,7 +114,7 @@
         <div class="form-group">
             <label>Hobbies</label>
             <div class="checkboxes">
-              <label><input type="checkbox" name="hobby" value="coding" <%=myProfile.hobbies.includes("coding") ? "checked" : ""%>>Coding</label>
+              <label><input type="checkbox" name="hobby" value="coding" <%=myProfile.hobbies.includes("coding") ? "checked" : "required"%>>Coding</label>
               <label><input type="checkbox" name="hobby" value="reading" <%=myProfile.hobbies.includes("reading") ? "checked" : ""%>>Reading</label>
               <label><input type="checkbox" name="hobby" value="painting" <%=myProfile.hobbies.includes("painting") ? "checked" : ""%>>Painting</label>
               <label><input type="checkbox" name="hobby" value="gaming" <%=myProfile.hobbies.includes("gaming") ? "checked" : ""%>>Gaming</label>
@@ -132,7 +132,7 @@
           
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea id="description" name="description" rows="4" cols="50" style="min-width: 600px; max-width:600px"><%=myProfile.description%></textarea>
+          <textarea id="description" name="description" rows="4" cols="50" style="min-width: 600px; max-width:600px" required><%=myProfile.description%></textarea>
         </div>
         <div class="form-group">
           <label for="location">Location</label>
@@ -178,7 +178,6 @@
       const checkboxes = document.querySelectorAll('input[type="checkbox"][name="hobby"]'); // returns list of checkboxes
       checkboxes.forEach((cb) => {if (cb.checked) hobbies.push(cb.value);});
       const description = document.getElementById('description').value;
-      const gender = document.getElementById('gender').value;
       const location = document.getElementById('location').value;
    
           fetch('/profile/edit', {
@@ -187,7 +186,6 @@
               id : '<%=myProfile.user._id%>',
               hobbies : hobbies,
               description : description,
-              gender : gender,
               location : location
             }),
             headers: {"Content-Type":"application/json; charset=UTF-8" }
