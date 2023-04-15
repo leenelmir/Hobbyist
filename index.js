@@ -27,6 +27,7 @@ app.use(bodyparse.json({ limit: '10mb' }));
 app.use(express.json());
 app.use(bodyparse.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.static(path.join(__dirname, "public")))
+
 const botName = "Hobbyist Bot";
 
 
