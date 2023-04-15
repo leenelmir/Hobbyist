@@ -6,6 +6,8 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 const config = require("config");
+const cookie = require("cookie");
+const authenticateUser = require('../middleware/auth');
 
 function validate(req) {
     console.log("inside validate");
@@ -56,6 +58,19 @@ router.post("/", async (req, res) => {
     const token = jwt.sign({ _id: user._id}, config.get('jwtPrivateKey'));
     
     res.cookie("token", token, {httpOnly:true}).status(200).send({status: "ok", data: user});
+});
+
+router.post("/logout", authenticateUser, (req, res) => {
+    try {
+        req.cookie.token
+        res.status(200).json({ status: "Logged out successfully"});
+    }
+    catch (err)
+    {
+        console.error(err);
+        return res.status(500).json({ status : "Server error" });
+    }
+ 
 });
 
 module.exports = router;

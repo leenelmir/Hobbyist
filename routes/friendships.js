@@ -4,6 +4,51 @@ const authenticateUser = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
 
+router.get("/friends", authenticateUser, async (req, res) => {
+    try
+    {
+        const senderID = req.body.sender;
+        const senderUser = await User.findOne({
+            _id: senderID
+        });
+        return res.status(200).json({ friends: senderUser.friends });
+    }
+    catch(err)
+    {
+        console.error(err);
+        return res.status(500).json({ status: "Server error" });
+    }
+});
+
+router.get("/requests", authenticateUser, async (req, res) => {
+    try
+    {
+        const senderID = req.body.sender;
+        const requests = await Friendship.findAll({
+            where: {
+                receiver: senderID
+            }
+        })
+        const requesters = requests.map(request => request.sender);
+
+        const requesterUsers = [];
+
+        for(const requester in requesters) {
+            const senderUser = await User.findOne({
+                _id: requester
+            });
+            if(senderUser)
+                requesterUsers.push(senderUser);
+        }
+        return res.status(200).json({ requesters: requesterUsers });
+    }
+    catch(err)
+    {
+        console.error(err);
+        return res.status(500).json({ status: "Server error" });
+    }
+});
+
 router.post("/request", authenticateUser, async (req, res) => {     
     try
     {
