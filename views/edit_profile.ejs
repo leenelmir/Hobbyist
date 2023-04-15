@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Profile Page</title>
-    <link rel="stylesheet" type="text/css" href="/profile_page.css">
+    <link rel="stylesheet" type="text/css" href="/edit_profile.css">
     <script src="/city_dictionary.js"></script>
     <style>
 
@@ -151,13 +151,6 @@
                 locationSelect.value = profileLocation;
               }
             </script>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="gender">Gender</label> 
-          <select id="gender" name="gender">
-            <option value="Male" <%= myProfile.gender === 'Male' ? 'selected' : '' %>>Male</option>
-            <option value="Female" <%= myProfile.gender === 'Female' ? 'selected' : '' %>>Female</option>
           </select>
         </div>
         <div class="message">

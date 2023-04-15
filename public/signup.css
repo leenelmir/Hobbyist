@@ -1,4 +1,11 @@
-.container {
+body {
+    background-image: url('https://img.freepik.com/free-vector/paper-style-white-monochrome-background_52683-66443.jpg?t=st=1681385230~exp=1681385830~hmac=b80538b47ef3a950c38640701c6949639603f988984c1fc82d8fa209998eaaed');
+    background-size: cover;
+    margin : 0;
+    padding: 0;
+}
+  
+  .container {
     max-width: 500px;
     margin: 0 auto;
     text-align: center;
@@ -17,9 +24,37 @@
     width: 100%;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #FFA500;
   }
   
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #FFA500;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: black;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+
   .btn {
     display: inline-block;
     background-color: #FFA500;
