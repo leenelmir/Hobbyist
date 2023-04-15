@@ -6,7 +6,8 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 const config = require("config");
-const authenticateUser = require("../middleware/auth")
+const cookie = require("cookie");
+const authenticateUser = require('../middleware/auth');
 
 function validate(req) {
     console.log("inside validate");
