@@ -2,7 +2,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: Arial, sans-serif;
-    background-image: url('https://img.freepik.com/free-vector/flat-hand-drawn-wavy-colored-groovy-background_23-2148848394.jpg?w=1800&t=st=1681723747~exp=1681724347~hmac=479890a39ad59b4ae1f720f5623349df660eee2e89658ccb03802cc54a813085');
+    background-image: url('https://img.freepik.com/free-vector/flat-hand-drawn-wavy-colored-groovy-background_23-2148848394.jpg?w=996&t=st=1681569823~exp=1681570423~hmac=7234a3abb4debf9ef0520a8736e90e0dc1511c3f24b93b6cddfaedc78c6efa4a');
     background-size: cover;
 }
 
@@ -54,11 +54,14 @@ main {
 }
 
 .friend-card {
+  display: inline-block;
 	flex-basis: calc(23.33% - 20px);
 	margin: 50px;
 	background-color: #eee;
 	padding: 20px;
 	text-align: center;
+  border-radius: 20px;
+  margin-top: 100px;
 }
 
 img {
@@ -184,17 +187,21 @@ li {
   }
 
   button#remove {
-	background-color: white;
-    color: orange;
-    border: 2px solid orange;
-    border-radius: 20px;
-    padding: 5px 15px;
-    font-size: 16px;
+    display: block;
+    margin: 10px auto 0 auto;
+    padding: 10px 40px;
+    border: 2px solid #2196F3;
+    border-radius: 25px;
+    background-color: #2196F3;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 button#remove:hover {
-    background-color: black;
-    color: orange;
-    border-color: orange;
+  background-color: #fff;
+  color: #2196F3;
+  border: 2px solid #2196F3;
   }

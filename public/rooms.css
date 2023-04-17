@@ -1,3 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('https://img.freepik.com/free-vector/flat-hand-drawn-wavy-colored-groovy-background_23-2148848394.jpg?w=996&t=st=1681569823~exp=1681570423~hmac=7234a3abb4debf9ef0520a8736e90e0dc1511c3f24b93b6cddfaedc78c6efa4a');
+  background-size: cover;
+   position: relative;
+  }
+
+
 .hobbyist {
     font-size: 38px !important; /* increase font size */
     font-style: italic; /* make the font italic */
@@ -119,9 +129,9 @@
     
     
     
-    .room-container{
-    margin-top: 180px;
-    }
+    /* .room-container{
+      
+      } */
   
     body::before {
       content: "";
@@ -131,7 +141,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.3);
+      background-color: rgba(0,0,0,0.05);
       z-index: -1;
      }
       h1 {
@@ -139,35 +149,8 @@
        margin-bottom: 20px;
      }
       .room-container {
+       margin-top: 180px;
        display: flex;
        flex-wrap: wrap;
        justify-content: center;
-     }
-      .room {
-       background-color: #ddd;
-       border-radius: 10px;
-       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-       margin: 20px;
-       padding: 20px;
-       text-align: center;
-       width: calc(33.33% - 40px);
-     }
-      .room img {
-       border-radius: 10px;
-       display: block;
-       margin: 0 auto 20px;
-       max-width: 100%;
-     }
-      .room h2 {
-       font-size: 24px;
-       margin-bottom: 10px;
-     }
-      .room p {
-       font-size: 16px;
-       margin-bottom: 10px;
-     }
-      .room span {
-       display: block;
-       font-size: 14px;
-       margin-bottom: 10px;
      }
