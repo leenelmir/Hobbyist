@@ -18,7 +18,7 @@ body {
     flex-direction: column !important;
     align-items: center !important;
     gap: 5px !important; /* adjust spacing between the icon and the text */
-    margin-right: 80px !important;
+    margin-right: 30px !important;
     color: white !important;
  }
  .nav-link:hover {

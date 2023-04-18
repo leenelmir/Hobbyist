@@ -180,6 +180,7 @@ li {
     text-align: center;
     transition: color 0.3s ease-in-out, font-style 0.3s ease-in-out;
     text-decoration: none;
+    margin-top: 10px;
   }
    .user-name:hover {
     color: orange;
