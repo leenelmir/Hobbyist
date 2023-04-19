@@ -6,62 +6,51 @@ body {
       background-size: cover;
       margin : 0;
       padding: 0;
+      position: relative;
+      font-family: Arial, sans-serif;
  }
 
  a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
  
  
- header {
-    background-color: orange;
-    height: 109px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-  }
-   .logo h1 {
-    font-size: 24px;
-    margin: 0;
-    padding: 0;
-  }
+.hobbyist {
+  font-size: 38px !important; /* increase font size */
+  font-style: italic; /* make the font italic */
+  color: white !important; /* change font color to white */
+}
+ .nav-link {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 5px !important; /* adjust spacing between the icon and the text */
+  margin-right: 30px !important;
+  color: white !important;
+}
+.nav-link:hover {
+  color: black !important;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: .5rem 0;
+  margin: .125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: .25rem;
+}
 
-   .logo a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 35px;
-    /* font-weight: bold; */
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    /* text-shadow: 0px 0px 5px #00ffff; */
-    text-shadow: 0px 0px 5px orange;
-    display: inline-block;
-    transition: transform 0.5s ease;
-  }
-   .logo a:hover {
-    transform: rotate(360deg);
-  }
-   nav ul {
-    display: flex;
-  }
-   nav li {
-    margin-right: 20px;
-  }
-   nav a {
-    /* color: #ffffff; */
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
-    /* font-weight: bold; */
-    font-family:'Times New Roman', Times, serif;
-    /* text-shadow: 0px 0px 5px #00ffff; */
-    /* text-shadow: 0px 0px 5px white; */
-  }
-   nav a:hover {
-    /* color: #00ffff; */
-    color: black;
-  }
- 
  
  
  
