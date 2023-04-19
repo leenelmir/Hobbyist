@@ -1,9 +1,10 @@
 const chatForm = document.getElementById("chat-form");
 const chatMessages = document.getElementById("chat-messages");
+const divHelper = document.getElementById("helper");
 
-const { username, room } = Qs.parse(location.search, {
-    ignoreQueryPrefix: true
-});
+const usernameHelper = divHelper.getAttribute("data-username");
+const roomHelper = divHelper.getAttribute("data-room")
+const { username, room } = { usernameHelper, roomHelper };
 
 const socket = io();
 
