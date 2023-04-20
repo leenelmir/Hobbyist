@@ -21,17 +21,16 @@
         <li><a href="#">Home</a></li>
         <li><a href="#">Friends</a></li>
         <li><a href="#">Groups</a></li>
-        <li><a href="#">Profile</a></li>
+        <li><a href="/profile/<%=myProfile.user.username%>">Profile</a></li>
         <li><a id="logout-button" href="#">Logout</a></li>
 			<script>
 			const logoutButton = document.getElementById('logout-button');
 			logoutButton.addEventListener('click', async (event) => {
 				event.preventDefault();
-				const response = await fetch('/api/auth/logout', { method: 'POST' });
-				if (response.ok) {
-					 // ADD LOGOUT SUCCESSFUL FIX
-				} else {
-					// handle failed logout
+				try {
+					window.location.href = "/logout";
+				} catch (err) {
+					alert("Logout unsuccessful");
 				}
 			});
 			</script>

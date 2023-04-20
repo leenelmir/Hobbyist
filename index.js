@@ -13,6 +13,7 @@ const socketio = require("socket.io");
 const formatMessage = require("./utils/messages");
 const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require("./utils/users");
 const path = require("path");
+const authenticateUser = require('./middleware/auth');
 
 const app = express();
 const server = http.createServer(app);
@@ -90,6 +91,14 @@ app.use("/api/auth", auth);
 app.use("/api/friendships", friendship);
 app.use("/profile", profile);
 app.get("/", (req, res) => {res.render('index');});
+app.get("/logout", authenticateUser, (req, res) => {
+    try {
+      res.clearCookie('token');
+      res.status(200).render('logout_page.ejs', { status: 'Token cookie has been cleared.' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ status:'Internal server error' });
+    } });
 
 server.listen(3000, () => {
     console.log("Listening to port 3000...");

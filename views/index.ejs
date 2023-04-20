@@ -68,7 +68,7 @@
                 const username = data.data.username;
                 invalid.textContent = "Login successful. Logging in...";
                 invalid.style.display = 'block';
-                setTimeout(function() { window.location.href = 'profile/' + username;}, 2000);
+                window.location.href = 'profile/' + username;
               }
           })
             
