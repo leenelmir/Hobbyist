@@ -1,0 +1,113 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+    background-image: url('https://img.freepik.com/free-vector/flat-hand-drawn-wavy-colored-groovy-background_23-2148848394.jpg?w=996&t=st=1681569823~exp=1681570423~hmac=7234a3abb4debf9ef0520a8736e90e0dc1511c3f24b93b6cddfaedc78c6efa4a');
+    background-size: cover;
+}
+
+.hobbyist {
+    font-size: 38px !important; /* increase font size */
+    font-style: italic; /* make the font italic */
+    color: white !important; /* change font color to white */
+  }
+   .nav-link {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 5px !important; /* adjust spacing between the icon and the text */
+    margin-right: 30px !important;
+    color: white !important;
+ }
+ .nav-link:hover {
+    color: black !important;
+  }
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+  }
+
+
+.post-content img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 0 auto 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.posts-container {
+    border: 1px solid #ccc;
+    width: 600px;
+	max-width: 700px;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.user-info {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.user-info img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+.post-actions button {
+	margin-right: 10px;
+}
+
+.comment-section {
+	margin-top: 10px;
+}
+
+.comment-section ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.comment-section li {
+	margin-bottom: 10px;
+}
+
+.comment-section p {
+	margin: 0;
+}
+
+.post-content {
+	width: 500px;
+	height: 500px;
+	overflow: hidden;
+	margin: 30px 0;
+    /* margin-left: 5px; */
+}
+

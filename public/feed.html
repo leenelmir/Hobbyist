@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Posts from Other Users</title>
+	<link rel="stylesheet" href="feed.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars/">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .navbar {
+            z-index: 1 !important;
+            background-color: orange !important;
+            height: 90px;
+          }
+         </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container-fluid">
+          <a class="hobbyist navbar-brand" href="#">Hobbyist</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link d-flex flex-column align-items-center" href="#">
+                  <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" style="width: 40px; height: 40px;" alt="Profile Picture" class="rounded-circle me-2">
+                  <span>Home</span>
+                </a>
+              </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex flex-column align-items-center" href="#">
+              <img src="https://cdn-icons-png.flaticon.com/512/6565/6565268.png" style="width: 40px; height: 40px;" alt="Profile Picture" class="rounded-circle me-2">
+              <span>Feed</span>
+            </a>
+            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link d-flex flex-column align-items-center" href="#" id="navbarDropdownFriends" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="	https://cdn-icons-png.flaticon.com/512/10313/10313078.png" style="width: 40px; height: 40px;" alt="Profile Picture" class="rounded-circle me-2">
+                  <span>Friends</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownFriends">
+                  <li><a class="dropdown-item" href="#">Connect with Friends</a></li>
+                  <li><a class="dropdown-item" href="#">My Friends</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link d-flex flex-column align-items-center" href="#">
+                  <img src="https://cdn-icons-png.flaticon.com/512/9234/9234940.png" style="width: 40px; height: 40px;" alt="Profile Picture" class="rounded-circle me-2">
+                  <span>Rooms</span>
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link d-flex flex-column align-items-center" href="#" id="navbarDropdownPicture" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" style="width: 40px; height: 40px;" alt="Profile Picture" class="rounded-circle me-2">
+                  <span>Username</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPicture">
+                  <li><a class="dropdown-item" href="#">My Profile</a></li>
+            <li><a class="dropdown-item" href="#">My Posts</a></li>
+                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+	<main>
+        <div class="posts-container">
+		<div class="post">
+			<div class="user-info">
+				<img src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="Profile Picture">
+				<p>Username</p>
+			</div>
+			<div class="post-content">
+				<img src="https://media.discordapp.net/attachments/976997370132848640/1086631420971204688/Axdwq_different_hobbies_as_logos_scattered_2769daa9-c8ae-4bcf-b39e-745fbf16633a.png?width=1026&height=1026" alt="Post Image">
+			</div>
+			<div class="post-actions">
+				<button class="like-button">Like</button>
+				<button class="comment-button">Comment</button>
+			</div>
+			<div class="comment-section">
+				<h2>Comments</h2>
+				<ul>
+					<li>
+						<p>Comment 1</p>
+					</li>
+					<li>
+						<p>Comment 2</p>
+					</li>
+					<li>
+						<p>Comment 3</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+        </div>
+
+        <div class="posts-container">
+            <div class="post">
+                <div class="user-info">
+                    <img src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="Profile Picture">
+                    <p>Username</p>
+                </div>
+                <div class="post-content">
+                    <img src="https://media.discordapp.net/attachments/976997370132848640/1086631420971204688/Axdwq_different_hobbies_as_logos_scattered_2769daa9-c8ae-4bcf-b39e-745fbf16633a.png?width=1026&height=1026" alt="Post Image">
+                </div>
+                <div class="post-actions">
+                    <button class="like-button">Like</button>
+                    <button class="comment-button">Comment</button>
+                </div>
+                <div class="comment-section">
+                    <h2>Comments</h2>
+                    <ul>
+                        <li>
+                            <p>Comment 1</p>
+                        </li>
+                        <li>
+                            <p>Comment 2</p>
+                        </li>
+                        <li>
+                            <p>Comment 3</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+    
+
+            <div class="posts-container">
+                <div class="post">
+                    <div class="user-info">
+                        <img src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="Profile Picture">
+                        <p>Username</p>
+                    </div>
+                    <div class="post-content">
+                        <img src="https://media.discordapp.net/attachments/976997370132848640/1086631420971204688/Axdwq_different_hobbies_as_logos_scattered_2769daa9-c8ae-4bcf-b39e-745fbf16633a.png?width=1026&height=1026" alt="Post Image">
+                    </div>
+                    <div class="post-actions">
+                        <button class="like-button">Like</button>
+                        <button class="comment-button">Comment</button>
+                    </div>
+                    <div class="comment-section">
+                        <h2>Comments</h2>
+                        <ul>
+                            <li>
+                                <p>Comment 1</p>
+                            </li>
+                            <li>
+                                <p>Comment 2</p>
+                            </li>
+                            <li>
+                                <p>Comment 3</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+        
+		
+		<!-- Repeat the structure of the post as needed for more posts -->
+		
+	</main>
+</body>
+</html>
