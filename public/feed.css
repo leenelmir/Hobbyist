@@ -131,3 +131,16 @@ body {
     /* margin-left: 5px; */
 }
 
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+
+.like-img {
+  height: 50px;
+  width: 50px;
+}
+
