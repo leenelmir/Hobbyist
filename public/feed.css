@@ -148,3 +148,10 @@ body {
   overflow-y: auto !important;
   max-height: 300px !important;
 }
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
