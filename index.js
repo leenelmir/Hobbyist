@@ -99,6 +99,8 @@ app.get("/logout", authenticateUser, (req, res) => {
       console.error(err);
       res.status(500).send({ status:'Internal server error' });
     } });
+    
+app.get("/home_page", (req,res)=> res.status(200).render('home_page.ejs'));    
 
 server.listen(3000, () => {
     console.log("Listening to port 3000...");
