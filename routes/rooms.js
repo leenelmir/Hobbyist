@@ -1,8 +1,14 @@
 const express = require("express");
 const authenticateUser = require("../middleware/auth");
 const router = express.Router();
+const cookieParser = require('cookie-parser');
+router.use(cookieParser());
 
-router.get("/rooms/:room", authenticateUser, async (req, res) => {
+router.get("/", authenticateUser, (req, res) => {
+    return res.status(200).render("rooms.ejs");
+});
+
+router.get("/:room", authenticateUser, async (req, res) => {
     try
     {
         const { room } = req.params;
@@ -19,5 +25,4 @@ router.get("/rooms/:room", authenticateUser, async (req, res) => {
 });
 
 
-
-modules.export = router;
+module.exports = router;
