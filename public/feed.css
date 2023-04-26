@@ -131,3 +131,27 @@ body {
     /* margin-left: 5px; */
 }
 
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+
+.like-img {
+  height: 35px;
+  width: 37px;
+}
+
+.modal-body {
+  overflow-y: auto !important;
+  max-height: 300px !important;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
