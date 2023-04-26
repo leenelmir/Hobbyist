@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 
-router.post("/post", authenticateUser, async (req, res) => {
+router.post("/", authenticateUser, async (req, res) => {
     try
     {
         const tempHobbies = [];
@@ -16,9 +16,9 @@ router.post("/post", authenticateUser, async (req, res) => {
         }
         const post = new Post({
             user: req.user._id,
-            postPicture: req.picture,
-            caption: req.caption,
-            hobbies: tempHobbies,
+            postPicture: req.body.picture,
+            caption: req.body.caption, 
+            hobbies: tempHobbies, 
             datePosted: currentDate
         })
 
@@ -32,3 +32,5 @@ router.post("/post", authenticateUser, async (req, res) => {
     }
     
 })
+
+module.exports = router;

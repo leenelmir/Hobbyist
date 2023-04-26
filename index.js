@@ -9,6 +9,7 @@ const friendship = require("./routes/friendships");
 const myFriends_page = require("./routes/myFriends_page");
 const feed = require("./routes/feed");
 const rooms = require ("./routes/rooms");
+const posts = require("./routes/posts");
 const bodyparse = require('body-parser');
 const cookieParser = require("cookie-parser");
 const config = require("config");
@@ -98,6 +99,7 @@ app.use("/home_page", home_page);
 app.use("/myFriends_page", myFriends_page);
 app.use("/feed", feed);
 app.use("/rooms", rooms);
+app.use("/posts", posts);
 app.get("/", (req, res) => {res.render('index');});
 app.get("/logout", authenticateUser, (req, res) => {
     try {
