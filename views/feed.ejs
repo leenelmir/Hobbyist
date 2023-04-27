@@ -6,6 +6,7 @@
   <!-- Bootstrap CSS -->
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
@@ -233,33 +234,17 @@ window.addEventListener('load', () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-      <script>
-        // GET ALL THE POSTS 
-        getPosts();
-        async function getPosts() {
-        const temp = await fetch('/posts/feed')
-        .then(response => response.json())
-        .then(data => {
-          const mainContent = document.querySelector("#main-content");
-          const posts = data.friendPosts;
-          const postsDetails = data.friendPostsDetails;
-          
-          var i = -1;
-          posts.forEach(post => {
-            i++;
-          const post1 = `<div class="posts-container">
-      <div class="post" id="post${i}">
-        <div class="user-info">
-          <img src="${postsDetails[i].profilePicture}" alt="Profile Picture">
-          <p>${postsDetails[i].username}</p>
-                  <button class="delete-icon" style="display: none;">Delete</button> <!-- fix this -->
-        </div>
-        <div class="post-content">
-          <img src="${post.postPicture}" alt="Post Image">
-        </div>
-        <div class="post-actions">
-
-          <p class="caption">${post.caption}</p>
+        <div class="posts-container">
+		<div class="post">
+			<div class="user-info">
+				<img src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="Profile Picture">
+				<p>Username</p>
+                <button class="delete-icon">Delete</button>
+			</div>
+			<div class="post-content">
+				<img src="https://media.discordapp.net/attachments/976997370132848640/1086631420971204688/Axdwq_different_hobbies_as_logos_scattered_2769daa9-c8ae-4bcf-b39e-745fbf16633a.png?width=1026&height=1026" alt="Post Image">
+			</div>
+			<div class="post-actions">
 
           <button class="like-button">
             <img class="like-img" src="https://cdn-icons-png.flaticon.com/512/4406/4406157.png" alt="Like">
@@ -270,106 +255,343 @@ window.addEventListener('load', () => {
             <img src="	https://cdn-icons-png.flaticon.com/512/2593/2593463.png" width="38px">
           </a>
 
-          <div class="modal fade" id="commentModal1" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="commentModalLabel">Comments</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-md-8 offset-md-2">
-                        <div class="d-flex align-items-center">
-                          <div class="pr-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
-                          </div>
-                          <div class="flex-grow-1">
-                            <form>
-                              <div class="form-group mb-0">
-                                <textarea class="form-control border-0" id="comment-text" rows="1" placeholder="Add a comment..."></textarea>
-                              </div>
-                            </form>
-                          </div>
+        <div class="modal fade" id="commentModal1" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                      <div class="d-flex align-items-center">
+                        <div class="pr-3">
+                          <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
                         </div>
-                        <hr>
-                        <div class="d-flex align-items-center">
-                          <div class="pr-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
-                          </div>
-                          <div class="flex-grow-1">
-                            <p><strong>Username:</strong> This is a comment on post number 1.</p>
-                            <a href="#" class="pl-2"><small>Like</small></a>
-                            <a href="#" class="pl-2"><small>Reply</small></a>
-                            <a href="#" class="pl-2"><small>Report</small></a>
-                            <small class="pl-2">4 hours ago</small>
-                          </div>
+                        <div class="flex-grow-1">
+                          <form>
+                            <div class="form-group mb-0">
+                              <textarea class="form-control border-0" id="comment-text" rows="1" placeholder="Add a comment..."></textarea>
+                            </div>
+                          </form>
                         </div>
-                        <hr>
-                        <div class="d-flex align-items-center">
-                          <div class="pr-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
-                          </div>
-                          <div class="flex-grow-1">
-                            <p><strong>Username:</strong> This is a sample comment.</p>
-                            <a href="#" class="pl-2"><small>Like</small></a>
-                            <a href="#" class="pl-2"><small>Reply</small></a>
-                            <a href="#" class="pl-2"><small>Report</small></a>
-                            <small class="pl-2">4 hours ago</small>
-                          </div>
+                      </div>
+                      <hr>
+                      <div class="d-flex align-items-center">
+                        <div class="pr-3">
+                          <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
                         </div>
-                        <hr>
-                        <div class="d-flex align-items-center">
-                          <div class="pr-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
-                          </div>
-                          <div class="flex-grow-1">
-                            <p><strong>Username:</strong> This is a sample comment.</p>
-                            <a href="#" class="pl-2"><small>Like</small></a>
-                            <a href="#" class="pl-2"><small>Reply</small></a>
-                            <a href="#" class="pl-2"><small>Report</small></a>
-                            <small class="pl-2">4 hours ago</small>
-                          </div>
+                        <div class="flex-grow-1">
+                          <p><strong>Username:</strong> This is a comment on post number 1.</p>
+                          <a href="#" class="pl-2"><small>Like</small></a>
+                          <a href="#" class="pl-2"><small>Reply</small></a>
+                          <a href="#" class="pl-2"><small>Report</small></a>
+                          <small class="pl-2">4 hours ago</small>
                         </div>
-                        <hr>
-                                        
-                        <div class="d-flex align-items-center">
-                          <div class="pr-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
-                          </div>
-                          <div class="flex-grow-1">
-                            <p><strong>Username:</strong> This is another sample comment.</p>
-                            <a href="#" class="pl-2"><small>Like</small></a>
-                            <a href="#" class="pl-2"><small>Reply</small></a>
-                            <a href="#" class="pl-2"><small>Report</small></a>
-                            <small class="pl-2">1 day ago</small>
-                          </div>
+                      </div>
+                      <hr>
+                      <div class="d-flex align-items-center">
+                        <div class="pr-3">
+                          <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                        </div>
+                        <div class="flex-grow-1">
+                          <p><strong>Username:</strong> This is a sample comment.</p>
+                          <a href="#" class="pl-2"><small>Like</small></a>
+                          <a href="#" class="pl-2"><small>Reply</small></a>
+                          <a href="#" class="pl-2"><small>Report</small></a>
+                          <small class="pl-2">4 hours ago</small>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="d-flex align-items-center">
+                        <div class="pr-3">
+                          <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                        </div>
+                        <div class="flex-grow-1">
+                          <p><strong>Username:</strong> This is a sample comment.</p>
+                          <a href="#" class="pl-2"><small>Like</small></a>
+                          <a href="#" class="pl-2"><small>Reply</small></a>
+                          <a href="#" class="pl-2"><small>Report</small></a>
+                          <small class="pl-2">4 hours ago</small>
+                        </div>
+                      </div>
+                      <hr>
+                                       
+                      <div class="d-flex align-items-center">
+                        <div class="pr-3">
+                          <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                        </div>
+                        <div class="flex-grow-1">
+                          <p><strong>Username:</strong> This is another sample comment.</p>
+                          <a href="#" class="pl-2"><small>Like</small></a>
+                          <a href="#" class="pl-2"><small>Reply</small></a>
+                          <a href="#" class="pl-2"><small>Report</small></a>
+                          <small class="pl-2">1 day ago</small>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Post</button>
-                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Post</button>
               </div>
             </div>
           </div>
-      
         </div>
-        
-      </div>
-          </div>`
-          mainContent.innerHTML += post1;
-        })
-          })
-        .catch(error => console.error(error));
-    }
-      </script>
+     
+			</div>
+			
+		</div>
+        </div>
+
+        <div class="posts-container">
+            <div class="post">
+                <div class="user-info">
+                    <img src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="Profile Picture">
+                    <p>Username</p>
+                    <button class="delete-icon">Delete</button>
+                </div>
+                <div class="post-content">
+                    <img src="https://media.discordapp.net/attachments/976997370132848640/1086631420971204688/Axdwq_different_hobbies_as_logos_scattered_2769daa9-c8ae-4bcf-b39e-745fbf16633a.png?width=1026&height=1026" alt="Post Image">
+                </div>
+                <div class="post-actions">
+
+                  <button class="like-button">
+                    <img class="like-img" src="https://cdn-icons-png.flaticon.com/512/4406/4406157.png" alt="Like">
+                </button>
+
+                <a href="#" data-toggle="modal" data-target="#commentModal2">
+                  <img src="	https://cdn-icons-png.flaticon.com/512/2593/2593463.png" width="38px">
+                </a>
+               
+               
+               
+               
+               
+               
+                  <div class="modal fade" id="commentModal2" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel2" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-md-8 offset-md-2">
+                                <div class="d-flex align-items-center">
+                                  <div class="pr-3">
+                                    <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                                  </div>
+                                  <div class="flex-grow-1">
+                                    <form>
+                                      <div class="form-group mb-0">
+                                        <textarea class="form-control border-0" id="comment-text" rows="1" placeholder="Add a comment..."></textarea>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                                <hr>
+                                <div class="d-flex align-items-center">
+                                  <div class="pr-3">
+                                    <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                                  </div>
+                                  <div class="flex-grow-1">
+                                    <p><strong>Username:</strong> This is a comment on post number 2.</p>
+                                    <a href="#" class="pl-2"><small>Like</small></a>
+                                    <a href="#" class="pl-2"><small>Reply</small></a>
+                                    <a href="#" class="pl-2"><small>Report</small></a>
+                                    <small class="pl-2">4 hours ago</small>
+                                  </div>
+                                </div>
+                                <hr>
+                                <div class="d-flex align-items-center">
+                                  <div class="pr-3">
+                                    <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                                  </div>
+                                  <div class="flex-grow-1">
+                                    <p><strong>Username:</strong> This is a sample comment.</p>
+                                    <a href="#" class="pl-2"><small>Like</small></a>
+                                    <a href="#" class="pl-2"><small>Reply</small></a>
+                                    <a href="#" class="pl-2"><small>Report</small></a>
+                                    <small class="pl-2">4 hours ago</small>
+                                  </div>
+                                </div>
+                                <hr>
+                                <div class="d-flex align-items-center">
+                                  <div class="pr-3">
+                                    <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                                  </div>
+                                  <div class="flex-grow-1">
+                                    <p><strong>Username:</strong> This is a sample comment.</p>
+                                    <a href="#" class="pl-2"><small>Like</small></a>
+                                    <a href="#" class="pl-2"><small>Reply</small></a>
+                                    <a href="#" class="pl-2"><small>Report</small></a>
+                                    <small class="pl-2">4 hours ago</small>
+                                  </div>
+                                </div>
+                                <hr>
+                                                 
+                                <div class="d-flex align-items-center">
+                                  <div class="pr-3">
+                                    <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                                  </div>
+                                  <div class="flex-grow-1">
+                                    <p><strong>Username:</strong> This is another sample comment.</p>
+                                    <a href="#" class="pl-2"><small>Like</small></a>
+                                    <a href="#" class="pl-2"><small>Reply</small></a>
+                                    <a href="#" class="pl-2"><small>Report</small></a>
+                                    <small class="pl-2">1 day ago</small>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Post</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            
+            </div>
+            </div>
+    
+
+            <div class="posts-container">
+                <div class="post">
+                    <div class="user-info">
+                        <img src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="Profile Picture">
+                        <p>Username</p>
+                        <button class="delete-icon">Delete</button>
+                    </div>
+                    <div class="post-content">
+                        <img src="https://media.discordapp.net/attachments/976997370132848640/1086631420971204688/Axdwq_different_hobbies_as_logos_scattered_2769daa9-c8ae-4bcf-b39e-745fbf16633a.png?width=1026&height=1026" alt="Post Image">
+                    </div>
+                    <div class="post-actions">
+
+                      <button class="like-button">
+                        <img class="like-img" src="https://cdn-icons-png.flaticon.com/512/4406/4406157.png" alt="Like">
+                    </button>
+
+                    <a href="#" data-toggle="modal" data-target="#commentModal3">
+                      <img src="	https://cdn-icons-png.flaticon.com/512/2593/2593463.png" width="38px">
+                    </a>
+                   
+                   
+                   
+                   
+                   
+                   
+                      <div class="modal fade" id="commentModal3" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel3" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container-fluid">
+                                <div class="row">
+                                  <div class="col-md-8 offset-md-2">
+                                    <div class="d-flex align-items-center">
+                                      <div class="pr-3">
+                                        <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                                      </div>
+                                      <div class="flex-grow-1">
+                                        <form>
+                                          <div class="form-group mb-0">
+                                            <textarea class="form-control border-0" id="comment-text" rows="1" placeholder="Add a comment..."></textarea>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex align-items-center">
+                                      <div class="pr-3">
+                                        <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                                      </div>
+                                      <div class="flex-grow-1">
+                                        <p><strong>Username:</strong> This is a comment on post number 3.</p>
+                                        <a href="#" class="pl-2"><small>Like</small></a>
+                                        <a href="#" class="pl-2"><small>Reply</small></a>
+                                        <a href="#" class="pl-2"><small>Report</small></a>
+                                        <small class="pl-2">4 hours ago</small>
+                                      </div>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex align-items-center">
+                                      <div class="pr-3">
+                                        <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                                      </div>
+                                      <div class="flex-grow-1">
+                                        <p><strong>Username:</strong> This is a sample comment.</p>
+                                        <a href="#" class="pl-2"><small>Like</small></a>
+                                        <a href="#" class="pl-2"><small>Reply</small></a>
+                                        <a href="#" class="pl-2"><small>Report</small></a>
+                                        <small class="pl-2">4 hours ago</small>
+                                      </div>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex align-items-center">
+                                      <div class="pr-3">
+                                        <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                                      </div>
+                                      <div class="flex-grow-1">
+                                        <p><strong>Username:</strong> This is a sample comment.</p>
+                                        <a href="#" class="pl-2"><small>Like</small></a>
+                                        <a href="#" class="pl-2"><small>Reply</small></a>
+                                        <a href="#" class="pl-2"><small>Report</small></a>
+                                        <small class="pl-2">4 hours ago</small>
+                                      </div>
+                                    </div>
+                                    <hr>
+                                                     
+                                    <div class="d-flex align-items-center">
+                                      <div class="pr-3">
+                                        <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                                      </div>
+                                      <div class="flex-grow-1">
+                                        <p><strong>Username:</strong> This is another sample comment.</p>
+                                        <a href="#" class="pl-2"><small>Like</small></a>
+                                        <a href="#" class="pl-2"><small>Reply</small></a>
+                                        <a href="#" class="pl-2"><small>Report</small></a>
+                                        <small class="pl-2">1 day ago</small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Post</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                   
+
+                    </div>
+                    
+                </div>
+                </div>
+
                 <script>
                   var likeButtons = document.querySelectorAll(".like-button");
                   var likeImgs = document.querySelectorAll(".like-img");
