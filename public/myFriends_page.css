@@ -101,34 +101,35 @@ li {
     margin-right: 10px;
 }
 
- button#accept-btn {
-    background-color: #2ecc71;
-    color: #fff;
-    border: none;
-    padding: 5px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
-  }
-  
-  button#accept-btn:hover {
-    background-color: lightgreen;
-  }
-  button#reject-btn {
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
-    padding: 5px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-    margin-top: 10px;
-  }
+.accept-btn {
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
 
-  button#reject-btn:hover {
-    background-color: lightcoral;
-  }
+.accept-btn:hover {
+  background-color: lightgreen;
+}
+  
+.reject-btn {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+ }
+
+.reject-btn:hover {
+  background-color: lightcoral;
+}
   
   .friend-name {
     display: inline-block;
@@ -155,16 +156,24 @@ li {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
   }
   
-  .friend-actions button.accept {
+  .friend-actions button.accept-btn {
     background-color: #2ecc71;
     color: #fff;
     box-shadow: none;
+}
+
+  .friend-actions button.accept-btn:hover {
+      background-color: lightgreen;
   }
-  
-  .friend-actions button.reject {
-    background-color: #e74c3c;
-    color: #fff;
-    box-shadow: none;
+ 
+  .friend-actions button.reject-btn {
+      background-color: #e74c3c;
+      color: #fff;
+      box-shadow: none;
+  }
+
+  .friend-actions button.reject-btn:hover {
+    background-color: #ef796c;
   }
   
   #sidebar li:not(:last-child) {

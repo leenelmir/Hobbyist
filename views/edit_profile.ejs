@@ -201,7 +201,7 @@
             else {
               document.getElementById('invalid').textContent = 'Failed to update profile. Try again.'
             }
-        })
+        }).catch((err)=>{console.error(err)})
           
         }
       );

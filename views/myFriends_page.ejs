@@ -73,57 +73,82 @@
 	</main>
 	<aside id="sidebar">
         <h2 class="friend-requests-heading">Friend Requests</h2>
-        <ul>
-          <li>
-            <!--WANT TO GET ALL THE FRIEND REQUESTS-->
-            <img src="https://via.placeholder.com/50" alt="Friend Image">
-            <span class="friend-name">John Smith</span>
+        <ul id="friend-requests"></ul>
+       
+         <script>
+
+      fetch('myFriends_page/check-request', {
+        method: 'POST',
+        headers: {"Content-Type":"application/json; charset=UTF-8"}
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status != "No requests!"){
+          
+          const requestProfiles = data.requestProfiles;
+          
+          const sidebar = document.getElementById('friend-requests');
+      
+          requestProfiles.forEach((requestProfile, index) => {
+          const friendRequest = `<li id="request${index}">
+            <img src="${requestProfile.profilePicture}" alt="Friend Image">
+            <span class="friend-name">${requestProfile.username}</span>
             <div class="friend-actions">
-              <button id="accept-btn">Accept</button>
-              <button id="reject-btn">Reject</button>
+              <button id="accept-btn${index}" class="accept-btn">Accept</button>
+              <button id="reject-btn${index}" class="reject-btn">Reject</button>
             </div>
-          </li>
-          <li>
-            <img src="https://via.placeholder.com/50" alt="Friend Image">
-            <span class="friend-name">Jane Smith</span>
-            <div class="friend-actions">
-              <button id="accept-btn">Accept</button>
-              <button id="reject-btn">Reject</button>
-            </div>
-          </li>
-          <li>
-            <img src="https://via.placeholder.com/50" alt="Friend Image">
-            <span class="friend-name">Bob Johnson</span>
-            <div class="friend-actions">
-              <button id="accept-btn">Accept</button>
-              <button id="reject-btn">Reject</button>
-            </div>
-          </li>
-          <li>
-            <img src="https://via.placeholder.com/50" alt="Friend Image">
-            <span class="friend-name">Bob Johnson</span>
-            <div class="friend-actions">
-              <button id="accept-btn">Accept</button>
-              <button id="reject-btn">Reject</button>
-            </div>
-          </li>
-          <li>
-            <img src="https://via.placeholder.com/50" alt="Friend Image">
-            <span class="friend-name">Bob Johnson</span>
-            <div class="friend-actions">
-              <button id="accept-btn">Accept</button>
-              <button id="reject-btn">Reject</button>
-            </div>
-          </li>
-          <li>
-            <img src="https://via.placeholder.com/50" alt="Friend Image">
-            <span class="friend-name">Bob Johnson</span>
-            <div class="friend-actions">
-              <button id="accept-btn">Accept</button>
-              <button id="reject-btn">Reject</button>
-            </div>
-          </li>
-          <!-- Add more friend requests here... -->
+          </li>`;
+          const friendRequestElement = document.createElement('div');
+          friendRequestElement.innerHTML = friendRequest;
+          sidebar.appendChild(friendRequestElement);
+
+          const acceptButton = document.getElementById(`accept-btn${index}`);
+          acceptButton.addEventListener('click', async (event) => {
+            // Handle accept button click event here
+                fetch(`/api/friendships/accept`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({sender : requestProfile.username})
+              }).then(res => res.json()).
+              then(data => {
+                if (data.status === "Friendship accepted"){
+                  const friendRequestElement = document.getElementById(`request${index}`);
+                  friendRequestElement.remove();
+                  console.log(`Accept button ${index} clicked`);
+              }
+              else {
+                alert("Something went wrong. Please try again later");
+              }
+              });
+          });
+
+          const rejectButton = document.getElementById(`reject-btn${index}`);
+          rejectButton.addEventListener('click', async (event) => {
+            // Handle reject button click event here
+                fetch(`/api/friendships/reject`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({sender : requestProfile.username})
+              }).then(res => res.json()).
+              then(data => {
+                console.log(data.status);
+                if (data.status === "Friendship declined!"){
+                  const friendRequestElement = document.getElementById(`request${index}`);
+                  friendRequestElement.remove();
+                  console.log(`Reject button ${index} clicked`);
+              }
+              else {
+                alert("Something went wrong. Please try again later");
+                console.log(data.status);
+              }
+              }).catch((err)=> console.error(err));
+          });
+        });
+      }
+      })
+      .catch((err) => console.error(err));
+            
+          </script>
         </ul>
       </aside>
       

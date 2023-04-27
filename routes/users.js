@@ -61,10 +61,8 @@ router.get("/friends", authenticateUser, async (req, res) => {
     const profilePictures = []; // FIX THIS ONCE ACCEPTED
 
     for (let i = 0; i < usernames.length; i++){
-        const profile = await Profile.findOne({}).populate({
-            path: 'user',
-            match: { username: usernames[i] }
-        });   
+        const user = await User.findOne({username : usernames[i]});
+        const profile = await Profile.findOne({user : user._id});
         profilePictures.push(profile.profilePicture);
     }
     const start = parseInt(offset);

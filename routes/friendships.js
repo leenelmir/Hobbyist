@@ -70,8 +70,6 @@ router.post("/request", authenticateUser, async (req, res) => {
             receiver: receiverID
         });
 
-        console.log(senderUser.friends);
-
         if(senderUser.friends.includes(receiverUser.username)) // (2): REPLACE ARGUMENT WITH req.user.username
             return res.status(400).json({status: "Already friends with that user!"});
         
@@ -95,7 +93,6 @@ router.post("/request", authenticateUser, async (req, res) => {
 
 router.post("/check-request", authenticateUser, async (req, res) => {     
     
-    console.log("check request: " + req.body.myUserId);
     try
     {
         if (!req.body.myUserId || !req.body.otherUserId){
@@ -117,39 +114,39 @@ router.post("/check-request", authenticateUser, async (req, res) => {
     }
     catch(err)
     {
-        console.log(req.body);
         console.error(err);
         return res.status(500).json({status : "Server error"});
     }
 });
 
-router.post("/accept", async (req, res) => {
+router.post("/accept", authenticateUser, async (req, res) => {
     try
     {
-        const senderID = req.body.sender;
-        const receiver = req.body.receiver;
+        const senderUsername = req.body.sender;
+        const receiverId = req.user._id;
 
         const senderUser = await User.findOne({
-            _id: senderID
+            username: senderUsername
         });
+
         const receiverUser = await User.findOne({
-            username: receiver
+            _id: receiverId
         });
 
         if(!senderUser || !receiverUser)
             return res.status(400).json({status : "Invalid user!"});
         
         const friendship = await Friendship.findOne({ 
-            sender: senderID,
-            receiver: receiverUser._id
+            sender: senderUser._id,
+            receiver: receiverId
         });
 
         if(!friendship)
             return res.status(400).json({status: "No existing friend request!"});
 
         await Friendship.findOneAndRemove({
-            sender: senderID,
-            receiver: receiverUser._id
+            sender: senderUser._id,
+            receiver: receiverId
         });
 
         receiverUser.friends.push(senderUser.username);
@@ -166,40 +163,41 @@ router.post("/accept", async (req, res) => {
     }
 });
 
-router.post("/reject", async (req, res) => {
+router.post("/reject", authenticateUser, async (req, res) => {
+
     try
     {
-        const senderID = req.body.sender;
-        const receiver = req.body.receiver;
+        const senderUsername = req.body.sender;
+        const receiverId = req.user._id;
 
         const senderUser = await User.findOne({
-            _id: senderID
+            username: senderUsername
         });
         const receiverUser = await User.findOne({
-            username: receiver
+            _id: receiverId
         });
 
         if(!senderUser || !receiverUser)
-            return res.status(400).send("Invalid user!");
+            return res.status(400).json({status: "Invalid user!"});
         
         const friendship = await Friendship.findOne({ 
-            sender: senderID,
+            sender: senderUser._id,
             receiver: receiverUser._id
         });
 
         if(!friendship)
-            return res.status(400).send("No existing friend request!");
+            return res.status(400).json({status: "No existing friend request!"});
 
         await Friendship.findOneAndRemove({
-            sender: senderID,
+            sender: senderUser._id,
             receiver: receiverUser._id
         });
         
-        return res.status(200).send("Friendship declined!");
+        return res.status(200).json({status: "Friendship declined!"});
 
     } catch (err) {
         console.error(err);
-        return res.status(500).send("Server error");
+        return res.status(500).json({status:"Server error"});
     }
 });
 

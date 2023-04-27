@@ -21,17 +21,22 @@ router.get('/', authenticateUser, async (req, res) =>{
 });
 
 router.post("/check-request", authenticateUser, async (req, res) => {     
-    
-    console.log("check request: " + req.body.myUserId);
-
     try
     {
         const user = await User.findOne({user: req.user._id});
-        const friendships = await Friendship.findOne({receiver: req.user._id});
+        const friendships = await Friendship.find({receiver: req.user._id});
         if (!friendships){
             return res.status(200).json({status: "No requests!"});
         }
-        return res.status(200).json({status: "done", friendships : friendships});
+        
+        var requestProfiles = [];
+        var i = 0;
+        for (const friendship of friendships){
+            const profile = await Profile.findOne({user : friendship.sender});
+            const user = await User.findOne({_id : friendship.sender});
+            requestProfiles[i++] = {username : user.username, profilePicture: profile.profilePicture};
+        }
+        return res.status(200).json({status: "done", requestProfiles : requestProfiles});
     }
     catch(err)
     {
