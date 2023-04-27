@@ -155,3 +155,9 @@ body {
   margin-top: 20px;
   margin-bottom: 40px;
 }
+
+.caption {
+  width: 93%;
+  padding: 10px;
+  text-overflow: ellipsis;
+}
