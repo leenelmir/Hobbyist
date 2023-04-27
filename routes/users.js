@@ -6,6 +6,7 @@ const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const express = require("express");
+const authenticateUser = require("../middleware/auth");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -49,5 +50,31 @@ router.post("/", async (req, res) => {
     
 });
 
+router.get("/friends", authenticateUser, async (req, res) => {
+    const { offset, limit } = req.query;
+    const user = await User.findOne({_id : req.user._id});
+    if (!user){
+        return res.status(500).send({status: "User not found!"});
+    }
+    const usernames = user.friends;
+    const profilePictures = []; // FIX THIS ONCE ACCEPTED
+
+    for (let i = 0; i < usernames.length; i++){
+        const profile = await Profile.findOne({}).populate({
+            path: 'user',
+            match: { username: usernames[i] }
+        });   
+        profilePictures.append(profile.profilePicture);
+    }
+    const start = parseInt(offset);
+    const end = start + parseInt(limit);
+    if (usernames.length == 0)
+        return res.status(200).send({usernames: usernames, profilePictures: profilePictures});
+
+    const subUsernames = usernames.slice(start, end > usernames.length ? usernames.length : end);
+    const subProfilePics = profilePictures.slice(start, end > usernames.length ? usernames.length : end);
+    
+    return res.status(200).send({ usernames: subUsernames, profilePictures : subProfilePics });
+});
 
 module.exports = router;

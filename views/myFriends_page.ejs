@@ -10,37 +10,66 @@
 		<button id="sidebar-toggle">Friend Requests</button>
 	</header>
 	<main>
-		<div class="friend-card">
-			<img src="https://via.placeholder.com/150" alt="Friend Image">
-			<a href = "https://example.com/profile"><h2 class="user-name">Karim El-AKhras</h2></a>
-			<button id="remove">Remove</button>
-		</div>
-		<div class="friend-card">
-			<img src="https://via.placeholder.com/150" alt="Friend Image">
-			<a href = "https://example.com/profile"><h2 class="user-name">Ahmad Haj Ali</h2></a>
-			<button id="remove">Remove</button>
-		</div>
-        <div class="friend-card">
-			<img src="https://via.placeholder.com/150" alt="Friend Image">
-			<a href = "https://example.com/profile"><h2 class="user-name">Leen El Mir</h2></a>
-			<button id="remove">Remove</button>
-		</div>
-        <div class="friend-card">
-			<img src="https://via.placeholder.com/150" alt="Friend Image">
-			<a href = "https://example.com/profile"><h2 class="user-name">Adam Ajour</h2></a>
-			<button id="remove">Remove</button>
-		</div>
-        <div class="friend-card">
-			<img src="https://via.placeholder.com/150" alt="Friend Image">
+    <div id="friend-list"> </div>
+    <button id="show-more-btn" style="display: none;">Show More</button>
+
+    <script>
+      fetchFriends(0, 6);
+      const showMoreBtn = document.getElementById('show-more-btn');
+      showMoreBtn.addEventListener('click', () => {
+        // Get the number of friends currently displayed on the page
+        const numDisplayedFriends = document.querySelectorAll('#friend-list .friend-card').length;
+        // Fetch the next 6 friends from the database
+        fetchFriends(numDisplayedFriends, 6);
+      });
+
+      function fetchFriends(offset, limit) {
+        // Send an AJAX request to the server to fetch friends
+        fetch(`/api/users/friends?offset=${offset}&limit=${limit}`)
+          .then(response => response.json())
+          .then(data => {
+            const usernames = data.usernames;
+            const profilePictures = data.profilePictures;
+            const friendListElem = document.getElementById('friend-list');
+            // Loop through the returned friends and append them to the friend list
+            let i = 0;
+            usernames.forEach(username => {
+              const friendElem = document.createElement('div');
+              friendElem.classList.add('friend-card');
+              
+              const imgElem = document.createElement('img');
+              imgElem.src = profilePictures[i++]; // replace with the actual image URL
+              
+              const aElem = document.createElement('a');
+              aElem.href = "/profile/"+username; // replace with the actual profile URL FIX THIS
+              aElem.classList.add('user-name');
+              aElem.textContent = username;
+              
+              const btnElem = document.createElement('button');
+              btnElem.id = 'remove';
+              btnElem.textContent = 'Remove';
+              
+              friendElem.appendChild(imgElem);
+              friendElem.appendChild(aElem);
+              friendElem.appendChild(btnElem);
+              
+              friendListElem.appendChild(friendElem);
+            });
+
+            // If less than 6 friends were returned, hide the "Show More" button
+            if (usernames.length < 6) {
+              showMoreBtn.style.display = 'none';
+            } else {
+              showMoreBtn.style.display = 'block';
+            }
+          })
+          .catch(error => console.error(error));
+      }
+    </script>
+		<!--	<img src="https://via.placeholder.com/150" alt="Friend Image">
 			<a href = "https://example.com/profile"><h2 class="user-name">John Morisson</h2></a>
-			<button id="remove">Remove</button>
+			<button id="remove">Remove</button> -->
 		</div>
-        <div class="friend-card">
-			<img src="https://via.placeholder.com/150" alt="Friend Image">
-			<a href = "https://example.com/profile"><h2 class="user-name">John Bradshaw</h2></a>
-			<button id="remove">Remove</button>
-		</div>
-		<!-- Add more friend cards here... -->
 	</main>
 	<aside id="sidebar">
         <h2 class="friend-requests-heading">Friend Requests</h2>

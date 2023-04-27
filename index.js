@@ -4,7 +4,12 @@ const mongoose = require("mongoose");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
 const profile = require("./routes/profile");
+const home_page = require("./routes/home_page");
 const friendship = require("./routes/friendships");
+const myFriends_page = require("./routes/myFriends_page");
+const feed = require("./routes/feed");
+const rooms = require ("./routes/rooms");
+const posts = require("./routes/posts");
 const bodyparse = require('body-parser');
 const cookieParser = require("cookie-parser");
 const config = require("config");
@@ -90,6 +95,11 @@ app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/friendships", friendship);
 app.use("/profile", profile);
+app.use("/home_page", home_page);
+app.use("/myFriends_page", myFriends_page);
+app.use("/feed", feed);
+app.use("/rooms", rooms);
+app.use("/posts", posts);
 app.get("/", (req, res) => {res.render('index');});
 app.get("/logout", authenticateUser, (req, res) => {
     try {
@@ -100,8 +110,6 @@ app.get("/logout", authenticateUser, (req, res) => {
       res.status(500).send({ status:'Internal server error' });
     } });
     
-app.get("/home_page", (req,res)=> res.status(200).render('home_page.ejs'));    
-
 server.listen(3000, () => {
     console.log("Listening to port 3000...");
 });

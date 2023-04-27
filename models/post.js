@@ -11,7 +11,6 @@ const postSchema = new mongoose.Schema({
     datePosted: String
   });
 
-const Profile = mongoose.model("Profiles", postSchema);
+const Post = mongoose.model("Posts", postSchema);
 
-exports.Profile = Profile;
-
+exports.Post = Post;

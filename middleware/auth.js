@@ -14,6 +14,7 @@ const authenticateUser = (req, res, next) => {
       return res.sendStatus(403);
     }
     req.user = user;
+    console.log(user._id + " " + req.user.username);
     next();
   });
 };
