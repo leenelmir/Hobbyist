@@ -4,6 +4,7 @@ const router = express.Router();
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 const { Profile } = require("../models/profile");
+const { User } = require("../models/user");
 
 router.get("/", authenticateUser, async (req, res) => {
 
@@ -25,10 +26,12 @@ router.get("/", authenticateUser, async (req, res) => {
 router.get("/:room", authenticateUser, async (req, res) => { 
     try
     {
-        const { room } = req.params;
-        const userName = req.user.username;
+        const roomName = req.params.room;
+        const user = await User.findOne({
+            _id: req.user._id
+        });
 
-        return res.status(200).render("chat.html", { roomName: room, userName: userName });
+        return res.status(200).render("chat", { roomName: roomName, userName: user.username });
     }
     catch (err)
     {
