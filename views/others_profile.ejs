@@ -117,7 +117,7 @@
 			const friends = '<%=JSON.stringify(otherProfile.user.friends)%>';
 			const friendReqButton = document.getElementById('friend-request-button');
 			if (friends.includes('<%=myProfile.user.username%>')) {
-				friendReqButton.textContent = "Already Friends";
+				friendReqButton.textContent = "Following";
 				friendReqButton.disabled = true;
 			}
 			// check if pending , else give option to add friend

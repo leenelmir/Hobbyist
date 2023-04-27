@@ -10,7 +10,11 @@ const profileSchema = new mongoose.Schema({
     profilePicture: String,
     hobbies: [String],
     gender : String,
-    location : String
+    location : String,
+    posts: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref : 'Posts'
+    }]
   });
 
 const Profile = mongoose.model("Profiles", profileSchema);

@@ -40,7 +40,8 @@ router.post("/", async (req, res) => {
         "https://www.w3schools.com/howto/img_avatar2.png",
         hobbies: [],
         gender: req.body.gender,
-        location: 'N/A'
+        location: 'N/A',
+        posts: []
     });
     await profile.save();
     
@@ -64,7 +65,7 @@ router.get("/friends", authenticateUser, async (req, res) => {
             path: 'user',
             match: { username: usernames[i] }
         });   
-        profilePictures.append(profile.profilePicture);
+        profilePictures.push(profile.profilePicture);
     }
     const start = parseInt(offset);
     const end = start + parseInt(limit);
