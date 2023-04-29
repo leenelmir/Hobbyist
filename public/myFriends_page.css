@@ -2,7 +2,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: Arial, sans-serif;
-    background-image: url('https://img.freepik.com/free-vector/flat-hand-drawn-wavy-colored-groovy-background_23-2148848394.jpg?w=996&t=st=1681569823~exp=1681570423~hmac=7234a3abb4debf9ef0520a8736e90e0dc1511c3f24b93b6cddfaedc78c6efa4a');
+  background-image: url('https://i.pinimg.com/originals/f2/09/51/f20951bbbcede63d9a5f7e016cc83372.jpg');
     background-size: cover;
 }
 
@@ -75,7 +75,7 @@ aside#sidebar {
 	display: none;
 	width: 400px;
 	height: 100%;
-    background-image: url('https://img.freepik.com/free-vector/floral-ornamental-abstract-background_52683-30016.jpg?w=996&t=st=1681569685~exp=1681570285~hmac=7e704570e7663e248d36f2e9113f3ebfc556be2d41fc135fe7e06ba631e4fd4f');
+    background-color: white;
     background-size: cover;
 	color: #fff;
 	padding: 20px;
@@ -134,7 +134,7 @@ li {
   .friend-name {
     display: inline-block;
     width: 60%;
-    color: white;
+    color: black;
     font-size: 16px;
   }
   

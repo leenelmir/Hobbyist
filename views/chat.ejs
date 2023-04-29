@@ -8,13 +8,10 @@
   <title>Hobbyist</title>
 </head>
 <body>
-  <% console.log("roomName:", roomName); %>
-  <% console.log("userName:", userName); %>
-
   <div class="chat-container">
     <header class="chat-header">
       <h1><i class="fas fa-regular fa-pen-fancy"></i> Hobbyist</h1>
-      <a href="" class="btn">Leave Room</a>
+      <a href="leave" class="btn">Leave Room</a>
     </header>
     <main class="chat-main">
       <div class="chat-sidebar">
@@ -39,6 +36,7 @@
     </div>
   </div>
   <div id="helper" data-username="<%=userName%>" data-room="<%=roomName%>"></div>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.1/qs.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="../public/js/main.js"></script>

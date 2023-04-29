@@ -6,6 +6,11 @@ router.use(cookieParser());
 const { Profile } = require("../models/profile");
 const { User } = require("../models/user");
 
+router.get("/leave", authenticateUser, async (req, res) => {
+    console.log("Hello");
+    res.redirect('/rooms');
+});
+
 router.get("/", authenticateUser, async (req, res) => {
 
     try {
@@ -40,6 +45,7 @@ router.get("/:room", authenticateUser, async (req, res) => {
     }
     
 });
+
 
 
 module.exports = router;

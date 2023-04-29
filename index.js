@@ -7,6 +7,7 @@ const profile = require("./routes/profile");
 const home_page = require("./routes/home_page");
 const friendship = require("./routes/friendships");
 const myFriends_page = require("./routes/myFriends_page");
+const connect_with_friends = require("./routes/connect_with_friends");
 const feed = require("./routes/feed");
 const rooms = require ("./routes/rooms");
 const posts = require("./routes/posts");
@@ -42,15 +43,17 @@ app.use('/public', express.static(path.join(__dirname, 'public'), {
       }
     }
   }));
-
+app.get('/upload-button', function(req, res) {
+    res.render("upload-button")
+})
 const botName = "Hobbyist Bot";
 
 
 io.on('connection', socket => {
     console.log("New websocket connection...");
 
-    socket.on("joinRoom", ({ username, room }) => {
-        const user = userJoin(socket.id, username, room);
+    socket.on("joinRoom", ({ usernameHelper, roomHelper }) => {
+        const user = userJoin(socket.id, usernameHelper, roomHelper);
         socket.join(user.room);
 
         socket.emit("message", formatMessage(botName, "Welcome to the room!"));
@@ -109,6 +112,8 @@ app.use("/myFriends_page", myFriends_page);
 app.use("/feed", feed);
 app.use("/rooms", rooms);
 app.use("/posts", posts);
+app.use("/connect_with_friends", connect_with_friends);
+
 app.get("/", (req, res) => {res.render('index');});
 app.get("/logout", authenticateUser, (req, res) => {
     try {

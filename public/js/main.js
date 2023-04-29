@@ -2,16 +2,14 @@ const chatForm = document.getElementById("chat-form");
 const chatMessages = document.getElementById("chat-messages");
 const divHelper = document.getElementById("helper");
 
-const usernameHelper = divHelper.getAttribute("data-username");
-const roomHelper = divHelper.getAttribute("data-room")
-const { username, room } = { usernameHelper, roomHelper };
+const usernameHelper = document.getElementById("helper").getAttribute("data-username");
+const roomHelper = document.getElementById("helper").getAttribute("data-room")
 
 const socket = io();
 
-socket.emit("joinRoom", { username, room });
+socket.emit("joinRoom", { usernameHelper, roomHelper});
 
 socket.on("roomUsers", ({ room, users }) => {
-    outputRoomName(room);
     outputUsers(users);
 });
 
@@ -44,9 +42,6 @@ function outputMessage(message) {
     chatMessages.append(div);
 }
 
-function outputRoomName(room) {
-    document.getElementById("room-name").innerHTML = room;
-}
 
 function outputUsers(users) {
     document.getElementById("users").innerHTML = ` ${users.map(user => `<li>${ user.username }</li>`).join("")}`;

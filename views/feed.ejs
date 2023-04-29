@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Posts from Other Users</title>
-	<link rel="stylesheet" href="feed.css">
+	<link rel="stylesheet" href="/feed.css">
   <!-- Bootstrap CSS -->
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -43,7 +43,7 @@
                   <span>Friends</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownFriends">
-                  <li><a class="dropdown-item" href="#">Connect with Friends</a></li> <!--FIX THIS-->
+                  <li><a class="dropdown-item" href="/connect_with_friends">Connect with Friends</a></li> <!--FIX THIS-->
                   <li><a class="dropdown-item" href="/myFriends_Page">My Friends</a></li>
                 </ul>
               </li>
@@ -72,11 +72,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 	<main id="main-content">
     <div class="container mt-5">
-      <div class="button-container">
-        <a href="#" data-toggle="modal" data-target="#myModal">
-          <img src="https://cdn-icons-png.flaticon.com/512/3820/3820184.png" alt="button icon" title="Upload Image" width="60" height="60">
-        </a>
-      </div>
+
     <!-- Pop-up modal -->
  <div class="modal fade" id="myModal">
   <div class="modal-dialog">
@@ -164,47 +160,7 @@
      
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="upload-btn">Upload</button>
-        <script>
-// UPLOAD BUTTON 
-window.addEventListener('load', () => {
-  const uploadButton = document.getElementById("upload-btn");
-  uploadButton.addEventListener("click", function() {
-    // GET IMAGE
-    const input = document.getElementById('image');
-    const file = input.files[0];
-    const reader = new FileReader();
-    reader.addEventListener('load', (event) => {
-      const imageDataUrl = event.target.result;
-      if (!imageDataUrl){
-        alert("Please insert image");
-        return;
-      } 
-      // GET HOBBIES  
-      const hobbies = [];
-      const checkboxes = document.querySelectorAll('input[type="checkbox"][name="hobbies"]'); // returns list of checkboxes
-      checkboxes.forEach((cb) => {if (cb.checked) hobbies.push(cb.id)});
-    
-      // GET CAPTION
-      const caption = document.getElementById("caption").value;
-      
-      // MAKE POST REQUEST
-      fetch('/posts', {
-        method: 'POST',
-        body: JSON.stringify({
-          caption : caption,
-          hobbies : hobbies,
-          picture: imageDataUrl
-        }),
-        headers: {"Content-Type":"application/json; charset=UTF-8" }
-      }).catch((err)=>
-        {console.error(err);
-        })
-    });
-    reader.readAsDataURL(file);
-  });
-});
-</script>
+       
       </div>
     </div>
   </div>
@@ -245,7 +201,8 @@ window.addEventListener('load', () => {
           <p class="caption">${post.caption}</p>
 
           <button class="like-button">
-            <img class="like-img" src="https://cdn-icons-png.flaticon.com/512/4406/4406157.png" alt="Like">   
+            <img class="like-img" src="https://cdn-icons-png.flaticon.com/512/4406/4406157.png" alt="Like">
+           
         </button>
           <a href="#" data-toggle="modal" data-target="#commentModal1">
             <img src="	https://cdn-icons-png.flaticon.com/512/2593/2593463.png" width="38px">

@@ -9,6 +9,8 @@
    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
    crossorigin="anonymous" referrerpolicy="no-referrer" />
    <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link href="https://fonts.cdnfonts.com/css/fjalla-one" rel="stylesheet">
+   <link href="https://fonts.cdnfonts.com/css/poiret-one" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Tilt+Prism&display=swap" rel="stylesheet">
 <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars/">
@@ -50,7 +52,7 @@
             <span>Friends</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownFriends">
-            <li><a class="dropdown-item" href="#">Connect with Friends</a></li> <!--FIX THIS-->
+            <li><a class="dropdown-item" href="/connect_with_friends">Connect with Friends</a></li> <!--FIX THIS-->
             <li><a class="dropdown-item" href="/myFriends_page">My Friends</a></li>
           </ul>
           </li>
@@ -81,46 +83,46 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
  
        <div class="welcome">
-           <h1>WELCOME <%=profile.user.username%> </h1> <!--FIX-->
+           <h1 style="font-family: 'Poiret One', sans-serif; margin-top: 20px"> WELCOME, &nbsp;  <%=profile.user.username%> </h1> <!--FIX-->
          </div>
 
          <div class="container">
            <div class="block">
              <div class="block-text">
-               <h3>Explore</h3>
-               <p>Allows users to easily browse and search for hobbies based on categories, skill level, and location.</p>
+               <h1 style="font-family: 'Fjalla One', sans-serif;">Explore</h1>
+               <p style="font-size: 20px">Allows users to easily browse and search for hobbies based on categories, skill level, and location.</p>
              </div>
              <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTg1OGUxMTM5MDkzNjEwMTEzNjdhNjllZGUwODQ3ZjQwYzNkZWVmZSZjdD1n/ynx1sj5Wz2atO/giphy.gif" alt="A funny GIF" />
             </div>
           
            <div class="block">
              <div class="block-text">
-               <h3>Duel With Friends</h3>
-               <p>Challenge friends and compete in different hobbies.</p>
+               <h1 style="font-family: 'Fjalla One', sans-serif;">Duel With Friends</h1>
+               <p style="font-size: 20px">Challenge friends and compete in different hobbies.</p>
              </div>
              <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDViNTNkNjkwNjlkNTFhYzJmNGZhMjRmZDA4YTdkMTgwYmEzM2MyNyZjdD1n/l0MYGLQ4aAbq14qWs/giphy.gif" alt="A funny GIF" />
             </div>
           
            <div class="block">
              <div class="block-text">
-               <h3>Study Group</h3>
-               <p>Connects users with others who share the same interests and hobbies, and enables them to form study groups and online communities.</p>
+               <h1 style="font-family: 'Fjalla One', sans-serif;">Study Group</h3>
+               <p style="font-size: 20px">Connects users with others who share the same interests and hobbies, and enables them to form study groups and online communities.</p>
              </div>
              <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTIyZjdlOGQ1ZWNkNGZkOGYxNGVlM2ViYThhNGExNjhlNDU4OTRlNCZjdD1n/fSYjlNlW2eDJCSgGvt/giphy.gif" alt="A funny GIF" />
             </div>
           
            <div class="block">
              <div class="block-text">
-               <h3>Build A Team</h3>
-               <p>Form and manage teams and groups related to their hobbies.</p>
+               <h1 style="font-family: 'Fjalla One', sans-serif;">Build A Team</h3>
+               <p style="font-size: 20px">Form and manage teams and groups related to their hobbies.</p>
              </div>
              <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGRmZWJhOTZkYWZmZTI5MTY3N2IwNTIyZmRmZjg4MmE1ZWY3YWY3MiZjdD1n/xT5LMGupUKCHb7DnFu/giphy.gif" alt="A funny GIF" />
             </div>
           
            <div class="block">
              <div class="block-text">
-               <h3>Find and Join a Squad</h3>
-               <p>Allows users to search for gaming squads that are actively recruiting members.</p>
+               <h1 style="font-family: 'Fjalla One', sans-serif;">Find and Join a Squad</h3>
+               <p style="font-size: 20px">Allows users to search for gaming squads that are actively recruiting members.</p>
              </div>
              <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWE4ZjZhMTkyYjZjYmE2MTk0YTUyYzBjYmQzZGFiODUzMDE3MTc5NSZjdD1n/5BUbbyS3zQ0igeNgY0/giphy-downsized-large.gif" alt="A funny GIF" />
             </div>

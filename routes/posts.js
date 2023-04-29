@@ -73,6 +73,7 @@ router.post("/", authenticateUser, async (req, res) => {
         });
 
         console.log("posting " + req.body.hobbies + " " + tempHobbies);
+        console.log("caption" + req.body.caption);
         const post = new Post({
             user: req.user._id,
             postPicture: req.body.picture,
