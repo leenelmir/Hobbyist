@@ -12,15 +12,23 @@
 	<main>
     <div id="friend-list"> </div>
     <button id="show-more-btn" style="display: none;">Show More</button>
-
+    <div id="confirm-modal" class="modal">
+      <div class="modal-content">
+        <h2>Are you sure you want to remove this friend? This action cannot be reversed.</h2>
+        <div class="modal-buttons">
+          <button id="confirm-yes">Yes</button>
+          <button id="confirm-no">Cancel</button>
+        </div>
+      </div>
+    </div>
     <script>
-      fetchFriends(0, 6);
+      fetchFriends(0, 4);
       const showMoreBtn = document.getElementById('show-more-btn');
       showMoreBtn.addEventListener('click', () => {
         // Get the number of friends currently displayed on the page
         const numDisplayedFriends = document.querySelectorAll('#friend-list .friend-card').length;
-        // Fetch the next 6 friends from the database
-        fetchFriends(numDisplayedFriends, 6);
+        // Fetch the next 4 friends from the database
+        fetchFriends(numDisplayedFriends, 4);
       });
 
       function fetchFriends(offset, limit) {
@@ -28,6 +36,7 @@
         fetch(`/api/users/friends?offset=${offset}&limit=${limit}`)
           .then(response => response.json())
           .then(data => {
+            console.log(data.usernames);
             const usernames = data.usernames;
             const profilePictures = data.profilePictures;
             const friendListElem = document.getElementById('friend-list');
@@ -46,18 +55,49 @@
               aElem.textContent = username;
               
               const btnElem = document.createElement('button');
-              btnElem.id = 'remove';
+              btnElem.id = 'remove'+i;
+              btnElem.className = 'remove';
               btnElem.textContent = 'Remove';
-              
+         
               friendElem.appendChild(imgElem);
               friendElem.appendChild(aElem);
               friendElem.appendChild(btnElem);
               
               friendListElem.appendChild(friendElem);
-            });
 
-            // If less than 6 friends were returned, hide the "Show More" button
-            if (usernames.length < 6) {
+              btnElem.addEventListener("click", (event)=>{
+                
+                const modalElem = document.getElementById('confirm-modal');
+                modalElem.style.display = 'block';
+                const confirmYesButton = document.getElementById("confirm-yes");
+                const confirmNoButton = document.getElementById("confirm-no");
+                confirmYesButton.addEventListener('click',(event)=>{
+                  fetch("/api/friendships/remove", {
+                        method: 'POST',
+                        headers: {"Content-Type":"application/json; charset=UTF-8"},
+                        body: JSON.stringify({username : username})
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        friendListElem.removeChild(friendElem);
+                        console.log(data.status); // log the status message returned by the server
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+                  modalElem.style.display= 'none';    
+                }
+              )
+
+              confirmNoButton.addEventListener('click', (event)=>{
+                console.log("please say in")
+                  modalElem.style.display= 'none';    
+                })
+              })
+;});
+
+            // If less than 4 friends were returned, hide the "Show More" button
+            if (usernames.length < 4) {
               showMoreBtn.style.display = 'none';
             } else {
               showMoreBtn.style.display = 'block';

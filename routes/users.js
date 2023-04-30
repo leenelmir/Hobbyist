@@ -70,6 +70,7 @@ router.get("/friends", authenticateUser, async (req, res) => {
     if (usernames.length == 0)
         return res.status(200).send({usernames: usernames, profilePictures: profilePictures});
 
+    console.log(usernames);    
     const subUsernames = usernames.slice(start, end > usernames.length ? usernames.length : end);
     const subProfilePics = profilePictures.slice(start, end > usernames.length ? usernames.length : end);
     

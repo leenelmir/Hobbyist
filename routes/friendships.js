@@ -201,5 +201,40 @@ router.post("/reject", authenticateUser, async (req, res) => {
     }
 });
 
+router.post("/remove", authenticateUser, async (req, res) => {
+    // remove each other from each other's lists
+
+    try {
+        console.log("id:"+req.user._id)
+        const user = await User.findOne({_id : req.user._id});
+        const friend = await User.findOne({username: req.body.username});
+
+        if (!user) {
+            return res.status(404).json({status: "User not found"});
+        }
+
+        if (!friend) {
+            return res.status(404).json({status: "Friend not found"});
+        }
+
+        const userIndex = user.friends.indexOf(friend.username);
+        if (userIndex !== -1) {
+            user.friends.splice(userIndex, 1);
+            await user.save();
+        }
+
+        const friendIndex = friend.friends.indexOf(user.username);
+        if (friendIndex !== -1) {
+            friend.friends.splice(friendIndex, 1);
+            await friend.save();
+        }
+
+        res.status(200).json({status: "Friend removed"});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({status: "Internal Server Error"});
+    }
+});
+
 
 module.exports = router;
