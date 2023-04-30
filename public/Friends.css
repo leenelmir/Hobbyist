@@ -112,7 +112,7 @@ body {
   }
    .profile-picture {
     width: 100%;
-    max-width: 200px;
+    max-width: 200px; /* increase the max-width to make pictures larger */
     height: auto;
   }
    .user-name {
@@ -145,25 +145,6 @@ body {
    .profile-picture:hover {
     transform: scale(1.1); /* magnify the picture by 10% */
     transition: transform 0.2s ease; /* add a smooth transition effect */
-  }
-  
-
-
-
-
-  .show-more {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px;
-
-    border-radius: 20px;
-    cursor: pointer;
-  }
-  
-  .show-more:hover button{
-    font-style: italic;
   }
  
 /* Popup container */

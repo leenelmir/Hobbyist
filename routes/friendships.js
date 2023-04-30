@@ -1,8 +1,10 @@
 const { Friendship } = require("../models/friendship");
 const { User } = require("../models/user");
+const { Profile } = require("../models/profile");
 const authenticateUser = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 
 router.get("/friends", authenticateUser, async (req, res) => {
     try
@@ -205,7 +207,6 @@ router.post("/remove", authenticateUser, async (req, res) => {
     // remove each other from each other's lists
 
     try {
-        console.log("id:"+req.user._id)
         const user = await User.findOne({_id : req.user._id});
         const friend = await User.findOne({username: req.body.username});
 
@@ -235,6 +236,57 @@ router.post("/remove", authenticateUser, async (req, res) => {
         res.status(500).json({status: "Internal Server Error"});
     }
 });
+
+router.get("/suggest-friends", authenticateUser, async (req, res)=>{
+
+    try {
+    const profile = await Profile.findOne({user : req.user._id}).populate("user");
+    if (!profile){
+        return res.status(404).json({status: "Profile not found!"});
+    }
+    // get top 10
+    const hobbies = profile.hobbies;
+    const location = profile.location;
+
+    const profiles = await Profile.find({ 
+        hobbies: { $in: hobbies },
+        location: location
+    }).limit(10).populate("user");
+
+    var filteredProfiles = profiles.filter(prof => {
+        return !prof.user.friends.includes(profile.user.username) && prof.user.username !== profile.user.username;
+      });
+
+    if (filteredProfiles.length < 10){
+        const profiles = await Profile.find({ 
+            $or : 
+            [
+                {hobbies: { $in: hobbies }, location: {$nin: location}
+                },
+                {location: location, hobbies: {$nin : hobbies}
+                }
+            ]
+        }).limit(10).populate("user");
+        
+        var secondaryFilteredProfiles = profiles.filter(prof => {
+            return !prof.user.friends.includes(profile.user.username) && prof.user.username !== profile.user.username;
+        })
+
+        var i = 0;
+        while(i < secondaryFilteredProfiles.length){
+            if (filteredProfiles.length === 10)
+                break;
+            filteredProfiles.push(secondaryFilteredProfiles[i++])    
+        }
+        res.status(200).json({suggestedProfiles : filteredProfiles});
+      }
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({status : "Internal Server Error"})
+    }
+
+})
 
 
 module.exports = router;
