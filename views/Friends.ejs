@@ -87,7 +87,37 @@
 
    <div class="search-container">
        <input type="text" id="search-input" name="search-input" placeholder= "Enter Username">
-       <button>Send Request</button>
+       <button id="check-profile">Check Profile</button>
+       <div class="popup">
+        <span class="popuptext" id="myPopup">User does not exist!</span>
+        </div>
+       <script>
+          const checkProfileButton = document.getElementById("check-profile");
+          const searchInput = document.getElementById("search-input");
+          const popup = document.createElement("div")
+          popup.classList.add("popup");
+          popup.classList.add("popup");
+          const popupText = document.createElement("span");
+          popupText.classList.add("popuptext");
+          popupText.id = "myPopup";
+          popupText.textContent = "User does not exist!";
+
+          popup.appendChild(popupText);
+
+          document.body.appendChild(popup);
+          checkProfileButton.addEventListener("click", async (event) => {
+            const url = "../profile/"+searchInput.value;
+              let res = await fetch(url);
+              if (res.ok) {
+                window.location.href = url;
+              }
+              else {
+                
+                document.getElementById("myPopup").classList.add("show");
+                setTimeout(function() {document.getElementById("myPopup").classList.remove("show");}, 2000);
+              }    
+            })
+       </script>
      </div>
 
 
