@@ -123,9 +123,9 @@
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col-md-8 offset-md-2">
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center2">
                           <div class="pr-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
+                            <img src=<%=myProfile.profilePicture%> class="rounded-circle" alt="User Avatar" style="width: 50px; height: 50px;">
                           </div>
                           <div class="flex-grow-1">
                             <form>
@@ -135,7 +135,6 @@
                             </form>
                           </div>
                         </div>
-                        <hr>
                       </div>
                     </div>
                   </div>
@@ -158,11 +157,11 @@
           const response = await fetch (`/posts/${post._id}/comments`);
           
           if (response.ok){
+              modalBody.innerHTML+=`<hr>`;
               const res = await response.json();
               const comments = res.comments;
-              comments.forEach(comment => {
+              comments.reverse().forEach(comment => {
               const comm = `
-              <hr>
                   <div class="d-flex align-items-center">
                     <div class="pr-3">
                       <img src="${comment.profilePicture}" class="rounded-circle" alt="User Avatar" style="width: 50px; height: 50px;">
@@ -174,11 +173,53 @@
                       <a href="#" class="pl-2"><small>Report</small></a>
                       <small class="pl-2">${comment.datePosted}</small>
                     </div>
-                  </div>`;
+                  </div>
+                  <hr>
+                  `;
                 
                 modalBody.innerHTML+=comm;
                 }
-              )}
+              )
+            
+              const postButton = document.getElementById("poster");
+              
+              postButton.addEventListener("click", async ()=>{
+                const text = document.getElementById("comment-text").value;
+                console.log("inside here please " + text)
+                const response = await fetch(`/posts/${post._id}/comment`, {
+                  method: 'POST',
+                  headers: {"Content-Type":"application/json; charset=UTF-8" },
+                  body: JSON.stringify({
+                    comment : text
+                  })
+                }).catch(err => {console.error(err)});
+
+                if (response.ok){
+                  const res = await response.json();
+                  const comment = res.newComment;
+                  const comm = `
+                  <div class="d-flex align-items-center">
+                    <div class="pr-3">
+                      <img src="${comment.profilePicture}" class="rounded-circle" alt="User Avatar" style="width: 50px; height: 50px;">
+                    </div>
+                    <div class="flex-grow-1">
+                      <p><strong>${comment.username}:</strong> ${comment.comment}</p>
+                      <a href="#" class="pl-2"><small>Like</small></a>
+                      <a href="#" class="pl-2"><small>Reply</small></a>
+                      <a href="#" class="pl-2"><small>Report</small></a>
+                      <small class="pl-2">${comment.datePosted}</small>
+                    </div>
+                  </div>
+                  <hr>
+                  `;
+
+                  document.getElementById("comment-text").value = "";
+                  const modalBody = document.getElementById("modal-body");
+                  const firstComment = modalBody.querySelector(".d-flex.align-items-center");
+                  firstComment.insertAdjacentHTML("beforebegin", comm);
+                }
+              })
+            }
           
           else {
               alert("Something went wrong while loading the comments...")

@@ -47,7 +47,6 @@ router.post("/", authenticateUser, async (req, res) => {
 
 router.post('/:id/like', authenticateUser, async (req, res) => {
   try {
-    console.log("INSIDEEE")
     // Find the post by ID
     const post = await Post.findById(req.params.id);
     const user = await User.findById(req.user._id);
@@ -114,6 +113,8 @@ router.post('/:id/comment', authenticateUser, async (req, res) => {
     try {
     const postId = req.params.id;
     const post = await Post.findById(postId);
+    
+    console.log("post: " + post)
     if(!post){
         return res.status(404).json({status: "Post not found!"})
     }
@@ -132,7 +133,7 @@ router.post('/:id/comment', authenticateUser, async (req, res) => {
 
     comments.push(newComment);
     await post.save();
-    return res.status(200).json({status : "comment saved", comments : comments})
+    return res.status(200).json({status : "comment saved", newComment : newComment})
 
     } catch (err) {
         console.error(err);
