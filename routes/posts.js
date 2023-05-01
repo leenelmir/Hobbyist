@@ -104,6 +104,7 @@ router.get('/:id/comments', authenticateUser, async (req, res) => {
         return res.status(404).json({status: "Post not found!"})
     }
     const comments = post.comments;
+   // console.log("inside the get comments "+ comments)
     res.status(200).json({ comments });
 })
 
