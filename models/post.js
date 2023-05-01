@@ -1,3 +1,4 @@
+const { Timestamp } = require("mongodb");
 const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema({
@@ -12,7 +13,9 @@ const postSchema = new mongoose.Schema({
     likes : [String],
     comments: [{
         comment: String,
-        username: String
+        datePosted: Date,
+        username:String,
+        profilePicture:String
       }]
   });
 

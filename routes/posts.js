@@ -5,7 +5,6 @@ const router = express.Router();
 const { Profile } = require("../models/profile");
 const {User} = require("../models/user");
 
-
 router.post("/", authenticateUser, async (req, res) => {
     try
     {
@@ -46,7 +45,6 @@ router.post("/", authenticateUser, async (req, res) => {
     
 })
 
-
 router.post('/:id/like', authenticateUser, async (req, res) => {
   try {
     console.log("INSIDEEE")
@@ -66,7 +64,7 @@ router.post('/:id/like', authenticateUser, async (req, res) => {
 
     await post.save();
 
-    res.status(200).json({ message: 'Post liked', post });
+    res.status(200).json({ message: 'Post liked' });
   } catch (err) {
     console.error(err);
     res.status(500).json({status : "Internal Server Error"})
@@ -92,12 +90,53 @@ router.post('/:id/unlike', authenticateUser, async (req, res) => {
   
       await post.save();
   
-      res.status(200).json({ message: 'Post unliked', post });
+      res.status(200).json({ status: 'Post unliked'});
     } catch (err) {
       console.error(err);
       res.status(500).json({status : "Internal Server Error"})
     }
-  })
-  
+  }) 
+
+router.get('/:id/comments', authenticateUser, async (req, res) => {
+    const postId = req.params.id;
+    const post = await Post.findById(postId);
+    if (!post){
+        return res.status(404).json({status: "Post not found!"})
+    }
+    const comments = post.comments;
+    res.status(200).json({ comments });
+})
+
+
+router.post('/:id/comment', authenticateUser, async (req, res) => {
+
+    try {
+    const postId = req.params.id;
+    const post = await Post.findById(postId);
+    if(!post){
+        return res.status(404).json({status: "Post not found!"})
+    }
+    const comments = post.comments;
+
+    const comment = req.body.comment;
+    const profile = await Profile.findOne({user : req.user._id}).populate("user");
+    const user = profile.user;
+
+    const newComment = {
+        comment: comment,
+        datePosted: new Date(),
+        username: user.username,
+        profilePicture: profile.profilePicture
+      };
+
+    comments.push(newComment);
+    await post.save();
+    return res.status(200).json({status : "comment saved", comments : comments})
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({status : "Internal Server Error"})
+    }
+})
 
 module.exports = router;
