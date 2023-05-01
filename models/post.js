@@ -8,7 +8,12 @@ const postSchema = new mongoose.Schema({
     postPicture: String,
     caption: String,
     hobbiesTags: [String],
-    datePosted: String
+    datePosted: String,
+    likes : [String],
+    comments: [{
+        comment: String,
+        username: String
+      }]
   });
 
 const Post = mongoose.model("Posts", postSchema);

@@ -5,60 +5,6 @@ const router = express.Router();
 const { Profile } = require("../models/profile");
 const {User} = require("../models/user");
 
-router.get("/feed", authenticateUser, async (req, res) => {
-        try {
-
-            // get the latest posts
-            const user = await User.findOne({_id: req.user._id});
-            if (!user){
-                return res.status(400).send({status: "User not found!"});
-            }
-
-            const friendUsernames = user.friends;
-        
-            const friendIds = []; // array of usernames of friends
-            for (const friendUsername of friendUsernames) {
-                const friend = await User.findOne({username : friendUsername});
-                if (friend) {
-                    friendIds.push(friend._id);
-                }
-            }
-            // all profiles of user's friends, returns all profiles of friends
-            const friendProfiles = await Profile.find({ user: { $in: friendIds } });
-    
-            // fill posts and sort posts of EACH USER
-            const friendPostPromises = friendProfiles.map(friendProfile => {
-                return friendProfile.populate({ 
-                    path: 'posts', 
-                    options: { 
-                        sort: { datePosted: -1 }, 
-                        limit: 20 
-                    } 
-                });
-            });
-    
-            // flatten the double array of posts
-            const friendPosts = await Promise.all(friendPostPromises)
-                                             .then(postsArr => postsArr.flatMap(posts => posts.posts));
-    
-            // Sort the posts by latest first FOR ALL USERS 
-            friendPosts.sort((a, b) => b.datePosted - a.datePosted);
-            var last5 = friendPosts.slice(0,20); // SPECIFY SIZE
-            var last5Details = [];
-
-            await Promise.all(last5.map(async (friendPost, i) => {
-                const friendUser = await User.findOne({_id : friendPost.user});
-                const friendProfile = await Profile.findOne({user : friendPost.user});
-                last5Details[i] = {username : friendUser.username, profilePicture : friendProfile.profilePicture};
-              }));
-              
-              return res.status(200).json({friendPosts : last5, friendPostsDetails: last5Details});
-        }
-        catch (err) {
-            console.error(err);
-           return res.status(500).send({status : "Internal Server Error"}); 
-        }
-})
 
 router.post("/", authenticateUser, async (req, res) => {
     try
@@ -99,5 +45,59 @@ router.post("/", authenticateUser, async (req, res) => {
     }
     
 })
+
+
+router.post('/:id/like', authenticateUser, async (req, res) => {
+  try {
+    console.log("INSIDEEE")
+    // Find the post by ID
+    const post = await Post.findById(req.params.id);
+    const user = await User.findById(req.user._id);
+
+    if (!post) {
+      return res.status(404).json({ status: 'Post not found' });
+    }
+
+    if (post.likes.includes(user.username)) {
+      return res.status(400).json({ message: 'You already liked this post' });
+    }
+
+    post.likes.push(user.username);
+
+    await post.save();
+
+    res.status(200).json({ message: 'Post liked', post });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({status : "Internal Server Error"})
+  }
+})
+
+router.post('/:id/unlike', authenticateUser, async (req, res) => {
+    try {
+      // Find the post by ID
+      const post = await Post.findById(req.params.id);
+      const user = await User.findById(req.user._id);
+  
+      if (!post) {
+        return res.status(404).json({ status: 'Post not found' });
+      }
+  
+      if (!post.likes.includes(user.username)) {
+        return res.status(400).json({ message: 'You did not like this post' });
+      }
+  
+      const index = post.likes.indexOf(user.username);
+      post.likes.splice(index, 1);
+  
+      await post.save();
+  
+      res.status(200).json({ message: 'Post unliked', post });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({status : "Internal Server Error"})
+    }
+  })
+  
 
 module.exports = router;

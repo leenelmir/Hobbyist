@@ -11,6 +11,7 @@ const connect_with_friends = require("./routes/connect_with_friends");
 const feed = require("./routes/feed");
 const rooms = require ("./routes/rooms");
 const posts = require("./routes/posts");
+const my_posts = require("./routes/my_posts");
 const bodyparse = require('body-parser');
 const cookieParser = require("cookie-parser");
 const config = require("config");
@@ -113,6 +114,7 @@ app.use("/feed", feed);
 app.use("/rooms", rooms);
 app.use("/posts", posts);
 app.use("/connect_with_friends", connect_with_friends);
+app.use("/my_posts", my_posts);
 
 app.get("/", (req, res) => {res.render('index');});
 app.get("/logout", authenticateUser, (req, res) => {
