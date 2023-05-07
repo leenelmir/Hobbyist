@@ -179,119 +179,185 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-      <script>
-        // GET ALL THE POSTS 
-          const mainContent = document.getElementById("main-content");
-          const myProfile = JSON.parse('<%-JSON.stringify(myProfile)%>');
-          const profilePicture = myProfile.profilePicture;
-          const username = myProfile.user.username;
-         
-          const posts = JSON.parse('<%-JSON.stringify(myPosts) %>');
-          console.log("posts : " + Array.isArray(posts))
-       
-          var i = -1;
-          posts.forEach(post => {
-            
-            i++;
-          const post1 = `<div class="posts-container">
-      <div class="post" id="post${i}">
-        <div class="user-info">
-          <img src="${profilePicture}" alt="Profile Picture">
-          <p>${username}</p>
-                  <button class="delete-icon" style="display: none;">Delete</button> <!-- fix this -->
-        </div>
-        <div class="post-content">
-          <img src="${post.postPicture}" alt="Post Image">
-        </div>
-        <div class="post-actions">
-          <p class="caption">${post.caption}</p>
+<script>
+  // GET ALL THE POSTS 
+    const mainContent = document.getElementById("main-content");
+    const posts = JSON.parse('<%-JSON.stringify(myPosts) %>');
+    const postsDetails = JSON.parse('<%-JSON.stringify(myPosts)%>')[0];
+    console.log(postsDetails)
+ 
+    var i = -1;
+    posts.reverse().forEach(post => {
+      i++;
+    const post1 = `<div class="posts-container">
+<div class="post" id="post${i}">
+  <div class="user-info">
+    <img src="<%=myProfile.profilePicture%>" alt="Profile Picture" style="width: 50px; height: 50px">
+    <p>${postsDetails.user.username}</p>
+            <button class="delete-icon" style="display: none;">Delete</button> <!-- fix this -->
+  </div>
+  <div class="post-content">
+    <img src="${post.postPicture}" alt="Post Image">
+  </div>
+  <div class="post-actions">
+    <p class="caption">${post.caption}</p>
 
-          <button class="like-button">
-            <img class="like-img" src="https://cdn-icons-png.flaticon.com/512/4406/4406157.png" alt="Like">
-           
-        </button>
-          <a href="#" data-toggle="modal" data-target="#commentModal1">
-            <img src="	https://cdn-icons-png.flaticon.com/512/2593/2593463.png" width="38px">
-          </a>
+    <button class="like-button">
+      <img class="like-img" src="https://cdn-icons-png.flaticon.com/512/4406/4406157.png" alt="Like">
+     
+  </button>
+  
+    <a href="#" data-toggle="modal" data-target="#commentModal${i}">
+      <img src="	https://cdn-icons-png.flaticon.com/512/2593/2593463.png" width="38px">
+    </a>
 
-          <div class="modal fade" id="commentModal1" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="commentModalLabel">Comments</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-md-8 offset-md-2">
-                        <div class="d-flex align-items-center">
-                          <div class="pr-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
-                          </div>
-                          <div class="flex-grow-1">
-                            <form>
-                              <div class="form-group mb-0">
-                                <textarea class="form-control border-0" id="comment-text" rows="1" placeholder="Add a comment..."></textarea>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="d-flex align-items-center">
-                          <div class="pr-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
-                          </div>
-                          <div class="flex-grow-1">
-                            <p><strong>Username:</strong> This is a comment on post number 1.</p>
-                            <a href="#" class="pl-2"><small>Like</small></a>
-                            <a href="#" class="pl-2"><small>Reply</small></a>
-                            <a href="#" class="pl-2"><small>Report</small></a>
-                            <small class="pl-2">4 hours ago</small>
-                          </div>
-                        </div>
-            
-                        <hr>
-                    
-                                        
-                        <div class="d-flex align-items-center">
-                          <div class="pr-3">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle" alt="User Avatar">
-                          </div>
-                          <div class="flex-grow-1">
-                            <p><strong>Username:</strong> This is another sample comment.</p>
-                            <a href="#" class="pl-2"><small>Like</small></a>
-                            <a href="#" class="pl-2"><small>Reply</small></a>
-                            <a href="#" class="pl-2"><small>Report</small></a>
-                            <small class="pl-2">1 day ago</small>
-                          </div>
-                        </div>
+    <div class="modal fade" id="commentModal${i}" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel${i}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-8 offset-md-2">
+
+                <div class="d-flex align-items-center">
+                  <div class="pr-3">
+                    <img src="<%=myProfile.profilePicture%>" class="rounded-circle" alt="User Avatar" style="width: 50px; height: 50px">
+                  </div>
+                  <div class="flex-grow-1">
+                    <form>
+                      <div class="form-group mb-0">
+                        <textarea class="form-control border-0" id="comment-text${i}" rows="1" placeholder="Add a comment..."></textarea>
                       </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Post</button>
-                </div>
+              
+                <hr>
+
+                <div class="others" id="comment${i}">
+                  
+                </div>  
+                
               </div>
             </div>
           </div>
-      
         </div>
-        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="poster${i}">Post</button>
+        </div>
       </div>
-          </div>`
-          mainContent.innerHTML += post1;
-        })
+    </div>
+  </div>
+  </div>
+</div>
+    </div>`
+    mainContent.innerHTML += post1;
+    
+    
+    getComments(i);
+    async function getComments(i) {
+   
+    // get comments
+   console.log("post: " + post._id)
+   console.log("commentSection " + name);
+   
+    const response = await fetch (`/posts/${post._id}/comments`);
+  
+    if (response.ok){
       
-    const uploadButton = document.getElementById("upload-btn");
-    const cancelButton = document.getElementById("closer");
-    cancelButton.addEventListener("click", function(){
-      console.log("cancel clicked")
-    })
+      const name = "comment"+i;
+    const commentSection = document.getElementById(name);
+        commentSection.innerHTML+=`<hr>`;
+        const res = await response.json();
+        const comments = res.comments;
+        console.log("comment " + i  + " " + comments);
+        comments.reverse().forEach(comment => {
+        commentSection.innerHTML += `
+            <div class="d-flex align-items-center">
+              <div class="pr-3">
+                <img src="${comment.profilePicture}" class="rounded-circle" alt="User Avatar" style="width: 50px; height: 50px;">
+              </div>
+              <div class="flex-grow-1">
+                <p><strong>${comment.username}:</strong> ${comment.comment}</p>
+                <a href="#" class="pl-2"><small>Like</small></a>
+                <a href="#" class="pl-2"><small>Reply</small></a>
+                <a href="#" class="pl-2"><small>Report</small></a>
+                <small class="pl-2">${comment.datePosted}</small>
+              </div>
+            </div>
+            <hr>
+            `;
+          }
+        )
+      
+        const postButton = document.getElementById("poster"+i);
+        
+        if(postButton){
+          console.log("found it")
+        }
+
+        if (postButton)
+      postButton.addEventListener("click", async ()=>{
+          
+          const text = document.getElementById("comment-text"+i).value;
+          console.log("in " + i  + "text: " + text);
+          const response = await fetch(`/posts/${post._id}/comment`, {
+            method: 'POST',
+            headers: {"Content-Type":"application/json; charset=UTF-8" },
+            body: JSON.stringify({
+              comment : text
+            })
+          }).catch(err => {console.error(err)});
+
+          if (response.ok){
+            const res = await response.json();
+            const comment = res.newComment;
+            const comm = `
+            <div class="d-flex align-items-center">
+              <div class="pr-3">
+                <img src="${comment.profilePicture}" class="rounded-circle" alt="User Avatar" style="width: 50px; height: 50px;">
+              </div>
+              <div class="flex-grow-1">
+                <p><strong>${comment.username}:</strong> ${comment.comment}</p>
+                <a href="#" class="pl-2"><small>Like</small></a>
+                <a href="#" class="pl-2"><small>Reply</small></a>
+                <a href="#" class="pl-2"><small>Report</small></a>
+                <small class="pl-2">${comment.datePosted}</small>
+              </div>
+            </div>
+            <hr>
+            `;
+
+            document.getElementById("comment-text"+i).value = "";
+            const firstComment = commentSection.querySelector(".d-flex.align-items-center");
+            if (firstComment)
+            firstComment.insertAdjacentHTML("beforebegin", comm);
+            else 
+            commentSection.innerHTML += comm;
+        
+          }
+        })
+     
+    }
+    
+    else {
+        alert("Something went wrong while loading the comments...")
+      }
+  
+    }
+    
+  
+  })
+
+  const uploadButton = document.getElementById("upload-btn");
+    
     uploadButton.addEventListener("click", function() {
       // GET IMAGE
       console.log("clicked");
@@ -328,12 +394,65 @@
       });
       reader.readAsDataURL(file);
     });
-      
-      </script>
 
-<script>
-  // UPLOAD BUTTON 
-  window.addEventListener('load', () => {
-    
-  });
+
+
+
+  var likeButtons = document.querySelectorAll(".like-button");
+  var likeImgs = document.querySelectorAll(".like-img");
+  var isLiked = [];
+
+
+  for (i = 0; i < likeButtons.length; i++) {
+     if (posts[i].likes.includes('<%=myProfile.user.username%>')){
+      isLiked.push(true);
+      likeImgs[i].src = 'https://cdn-icons-png.flaticon.com/512/4406/4406155.png';
+    }
+    else {
+      isLiked.push(false);
+      likeImgs[i].src = 'https://cdn-icons-png.flaticon.com/512/4406/4406157.png';
+    }
+      likeButtons[i].addEventListener("click", createClickListener(i));
+  }
+
+
+  function createClickListener(index) {
+  
+      return async function() {
+       
+        const posts = JSON.parse('<%-JSON.stringify(myPosts) %>');
+      
+        const postId=posts[index]._id;
+          if (isLiked[index]) {
+              // remove from likes
+              const response = await fetch (`/posts/${postId}/unlike`, {
+                method: 'POST',
+                headers: {"Content-Type":"application/json; charset=UTF-8" }
+              });
+
+              if (response.ok) {
+              likeImgs[index].src = "https://cdn-icons-png.flaticon.com/512/4406/4406157.png";
+              isLiked[index] = false;
+            }
+              else {
+                alert("Something went wrong. Try again later!");
+              }
+          } else {
+               // add to likes
+              const response = await fetch(`/posts/${postId}/like`, {
+              method: 'POST',
+              headers: {"Content-Type":"application/json; charset=UTF-8" }
+            });
+
+              if (response.ok) {
+              likeImgs[index].src = "https://cdn-icons-png.flaticon.com/512/4406/4406155.png";
+              isLiked[index] = true;
+            }
+              else {
+                alert("Something went wrong. Try again later!");
+              }
+          }
+      }
+  }
   </script>
+
