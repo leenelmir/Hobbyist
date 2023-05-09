@@ -17,7 +17,8 @@ router.get("/", authenticateUser, async (req, res) => {
             return res.status(404).json({status : "Profile not found!"});
        
         const myPosts = await Post.find({ user : req.user._id}).populate("user");
-        res.status(200).render('my_posts.ejs', {myProfile: myProfile, myPosts : myPosts});
+       
+        res.status(200).render('my_posts.ejs', {myProfile: myProfile, myPosts : myPosts.reverse()});
     }
     catch (err) {
         console.error(err);

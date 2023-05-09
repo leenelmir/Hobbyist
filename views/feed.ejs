@@ -83,11 +83,12 @@
       <script>
         // GET ALL THE POSTS 
           const mainContent = document.getElementById("main-content");
-          const posts = JSON.parse('<%-JSON.stringify(friendPosts) %>');
+          const posts = JSON.parse('<%-JSON.stringify(friendPosts)%>');
           const postsDetails = JSON.parse('<%-JSON.stringify(friendPostsDetails)%>');
        
           var i = -1;
-          posts.reverse().forEach(post => {
+          posts.forEach(post => {
+            console.log(post.caption + " caption");
             i++;
           const post1 = `<div class="posts-container">
       <div class="post" id="post${i}">
@@ -237,7 +238,14 @@
 
                   document.getElementById("comment-text"+i).value = "";
                   const firstComment = commentSection.querySelector(".d-flex.align-items-center");
+                  if (firstComment)
                   firstComment.insertAdjacentHTML("beforebegin", comm);
+                  else 
+                  {
+                    const name = "comment"+i;
+                    const commentSection = document.getElementById(name);
+                    commentSection.innerHTML += comm;
+                  }
               
                 }
               })

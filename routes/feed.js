@@ -66,10 +66,14 @@ router.get("/", authenticateUser, async (req, res) => {
 
     try {
 
+
         const {friendPosts, friendPostsDetails} = await getPosts(req, res);
         // get the latest posts
         const myProfile = await Profile.findOne({user : req.user._id}).populate("user");
-        console.log("insdie here")
+     
+      ///  const rev = friendPosts.reverse();
+      
+    //    const revDetails = friendPostsDetails.reverse();
         res.status(200).render('feed.ejs', {myProfile: myProfile, friendPosts : friendPosts, 
         friendPostsDetails : friendPostsDetails});
     }
